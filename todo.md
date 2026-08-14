@@ -211,3 +211,4 @@
 - [x] Add a truthful contact form that prepares a prefilled email to the approved Gmail address, with clear local validation and no false server-delivery claim.
 - [x] Add accessible click-to-copy email feedback, direct telephone dialing, and clearly labelled LinkedIn/X social-profile placeholders beside the public contact details.
 - [x] Add focused tests and responsive visual validation for the new contact interactions, then publish the verified update.
+- [x] Reassess remaining SAMAY activation tasks for safe, owner-independent improvements and document the exact approved inputs required where activation must remain blocked.
