@@ -11,7 +11,7 @@ export type Watch = { slug: string; reference: string; name: string; family: str
 const assets = {
   meridian: "/manus-storage/samay-meridian-product_5610b9bd.jpg", serein: "/manus-storage/samay-serein-product_147168aa.jpg", vesper: "/manus-storage/samay-vesper-product_0b2003dc.jpg",
   dial: "/manus-storage/samay-macro-dial_8993792c.jpg", case: "/manus-storage/samay-case-profile_d72bd80f.jpg", crown: "/manus-storage/samay-crown-detail_6c531800.jpg", movement: "/manus-storage/samay-movement-study_129e7db4.jpg", tools: "/manus-storage/samay-atelier-tools_ad9fdca5.jpg",
-  meridianBack: "/manus-storage/samay-movement-study_129e7db4.jpg", meridianCrown: "/manus-storage/samay-case-profile_d72bd80f.jpg", meridianDial: "/manus-storage/samay-macro-dial_8993792c.jpg", sereinBracelet: "/manus-storage/samay-serein-product_147168aa.jpg", vesperBack: "/manus-storage/samay-movement-study_129e7db4.jpg",
+  meridianBack: "/manus-storage/samay-meridian-caseback_3b151ca8.jpg", meridianCrown: "/manus-storage/samay-case-profile_d72bd80f.jpg", meridianDial: "/manus-storage/samay-meridian-dial-close_18e9049b.jpg", sereinBracelet: "/manus-storage/samay-serein-bracelet-detail_fce7eb47.jpg", vesperBack: "/manus-storage/samay-vesper-caseback_49be1f8e.jpg",
 };
 
 const availability = (label: string, note: string): Availability => ({ label, action: label === "Private viewing" ? "Request a private viewing" : "Request availability", note, longNote: "This reference is presented for private examination. Share a preferred city or time of week and the house will prepare the appropriate next conversation." });

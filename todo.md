@@ -177,6 +177,12 @@
 
 ## Interactive watch-gallery and motion refinement — active work
 
+## User-authorized integration and product-asset discovery — active work
+
+- [x] Re-audit the approved Google Calendar, concierge, project-secret, and durable asset sources for owner-configured production inputs. No SAMAY-labelled calendar availability, configured concierge destination, project secrets, or alternate exterior configuration photography is present; four matched product-detail studies were verified and moved to durable gallery storage.
+- [x] Activate only verified booking links, approved delivery endpoints, and genuinely configuration-specific product images discovered through the authorized sources. The verified Meridian dial/caseback, Serein bracelet, and Vesper caseback studies now enrich their own reference galleries; no unverified booking, delivery, or configuration path was activated.
+- [x] Validate the durable-gallery update and preserve contact and single-configuration fallbacks when no approved data exists. Meridian’s full-page gallery and the private-viewing route render cleanly after a fresh server restart; no booking or concierge dispatch is exposed without configuration.
+
 - [x] Audit the existing chapter gallery, inspection dialog, product-card hover states, and motion preference rules.
 - [x] Add an accessible interactive watch-chapter gallery with thumbnail selection, keyboard navigation, controlled zoom, and a non-disruptive close path.
 - [x] Add restrained scroll-reveal and model-hover feedback with performant animation properties and reduced-motion fallbacks.
