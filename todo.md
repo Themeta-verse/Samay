@@ -115,3 +115,31 @@
 - [x] Mobile regression at 390px preserves the hero, collection cards, product examination, materials archive, boutique rooms, contact cards, and footer without horizontal overflow.
 - [x] Corrected the brand mark from the duplicated `AAMAY` state to the intended `SAMAY` wordmark treatment.
 - [x] Home journal imagery now renders as campaign photography rather than neutral wells in the full-page capture.
+
+## Product experience and luxury commerce pass — unchecked work
+
+- [x] Read the remainder of the product-experience brief and audit the existing watch detail, data model, gallery, configuration, specifications, request flow, and mobile ordering.
+- [x] Expand product data only with technically coherent fictional watch information that is already supported by the design system and available imagery.
+- [x] Build a dominant product hero with restrained model, collection, availability, and request information.
+- [x] Rebuild the gallery as an editorial inspection with large views, keyboard-safe movement through imagery, and a clean close path.
+- [x] Add an elegant image-inspection interaction with desktop zoom/pan support and mobile touch/swipe controls where reliable.
+- [x] Keep configuration truthful: the image rail is the only image-backed visual selection, while unrepresented variants are routed to Private Selection rather than fabricated in the product UI.
+- [x] Build a technical editorial section for case, movement, dial, and strap; avoid generic card grids and contradictory data.
+- [x] Add movement, material, craftsmanship, and product-story sections with object-led imagery and concise watch-specific copy.
+- [x] Introduce premium availability/request and related-watch journeys without fake scarcity, urgency, coupon UI, reviews, or unapproved checkout behavior.
+- [x] Perfect mobile product order, focus states, interactions, image priority, responsive composition, and route escape paths.
+- [x] Run visual, accessibility, console, network, and production-build QA for Meridian, Serein, and Vesper before the next checkpoint.
+
+## Product-system QA findings
+
+- [x] Desktop product review confirms the new hero, editorial image rail, technical ledger, material/craft sections, request treatment, and related-watch ending read as one Atelier Obsidian product system.
+- [x] Replaced the five in-flight generated inspection placeholders with durable existing campaign studies after full-page QA exposed blank temporary wells; product pages now prioritize complete, stable image fields over speculative imagery.
+- [x] Re-run the three product routes and mobile product order after stabilizing all gallery assets.
+
+- [x] Re-ran Meridian, Serein, and Vesper after stable asset substitution; desktop and mobile product-story images, craft images, and related-watch cards remain visible through the full page.
+- [x] Final TypeScript and production builds pass, with no recent browser-console errors or failed network requests on the product routes.
+- [x] The production build retains only the known non-blocking bundle-size advisory; critical hero image uses eager/high-priority loading and noncritical gallery rail frames remain deferred.
+
+- [x] Desktop recheck confirms every gallery, movement, material, craft, and related-watch image panel is now populated with stable SAMAY campaign imagery.
+- [x] Mobile recheck confirms the top product order, request controls, gallery rail, technical ledger, and related-watch route are readable at 390px.
+- [x] The mobile full-page capture no longer suppresses lower technical imagery after promoting product-story, craft, and related-watch images to eager loading.
