@@ -47,7 +47,11 @@
 .samay-app :is(.section-label__index, .section-label::before, .eyebrow, .discover-panel__index, .hero__rail-line) { color: var(--champagne); }
 .samay-app :is(.section-label::after, .section-label__rule, .site-footer__bottom, .contact-details__grid > div, .boutique-card) { border-color: rgba(183,157,112,.46); }
 .samay-app .brand-name { letter-spacing: .24em; font-variant: small-caps; }
-.samay-app .brand-name__initial { display: inline-block; position: relative; margin-right: -.02em; font-style: italic; transform: skewX(-10deg); }
-.samay-app .brand-name__initial::after { content: ""; position: absolute; left: 42%; bottom: -.16em; width: .42em; height: 1px; background: var(--champagne); transform: rotate(-28deg); }
+.samay-app .brand-name__aperture { font-style: italic; transform: skewX(-8deg); }
+.samay-app .brand-name__aperture::after { border-color: var(--champagne); }
 .samay-app :is(.contact-details__grid > div, .boutique-card) { transition: transform .22s var(--ease-out), border-color .22s var(--ease-out), background-color .22s var(--ease-out); }
 .samay-app :is(.contact-details__grid > div, .boutique-card):hover { transform: translateY(-4px); border-color: var(--champagne); background: #202421; }
+.samay-app .form-handoff--dark { border-color: var(--rule-dark); }
+.samay-app .form-handoff--dark > span { color: var(--champagne); }
+.samay-app .form-handoff--dark p { color: var(--ash); }
+.samay-app .form-error--dark { margin: -10px 0 0; color: #e8b0a4; font-size: 12px; }

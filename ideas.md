@@ -119,3 +119,6 @@ The experience supports product selection, a persistent viewing tray, availabili
 - Every non-product image must depict atelier craft, architectural shadow, material surfaces, tools, movements, leather, steel, stone, or controlled gallery light; generic lifestyle interiors are excluded.
 - Warm Ivory is a reading surface only when anchored by graphite image wells, smoked-steel rules, or champagne measuring marks, so pale pages remain connected to the dark atelier world.
 - Champagne Metal `#B79D70` is the sole signature signal for active states, measured hairlines, section emphasis, and key material annotations; it appears rarely but consistently.
+- Each reference has its own exhibition chapter: Meridian privileges ivory proportion and dress restraint; Serein privileges legibility, steel, and the everyday wrist; Vesper privileges shadow, complication, and a manual reserve. Shared product primitives may not repeat dominant chapter headlines across the three routes.
+- The aperture mark and cut-letter construction must be legible at navigation and footer scale, so SAMAY cannot read as unmodified spaced serif type.
+- Product imagery must progress from exterior object stage to distinct evidence. When no additional credible campaign study exists, the interface must preserve that limitation rather than simulate another configuration or detail crop.

@@ -7,18 +7,23 @@ import type { ProductGalleryFrame, Watch } from "@/lib/samayData";
 function clamp(value: number, min: number, max: number) { return Math.min(Math.max(value, min), max); }
 
 function ProductImage({ frame, eager, className = "", style }: { frame: ProductGalleryFrame; eager?: boolean; className?: string; style?: React.CSSProperties }) {
-  return <img className={className} style={style} src={frame.image} data-fallback={frame.fallback} onError={(event) => { const image = event.currentTarget; const fallback = image.dataset.fallback; if (fallback && image.src !== fallback) image.src = fallback; }} alt={frame.alt} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" />;
+  const [ready, setReady] = useState(false);
+  useEffect(() => { setReady(false); }, [frame.image]);
+  return <img className={`${className} product-image ${ready ? "is-ready" : ""}`} style={{ objectPosition: frame.position, ...style }} src={frame.image} data-fallback={frame.fallback} onLoad={() => setReady(true)} onError={(event) => { const image = event.currentTarget; const fallback = image.dataset.fallback; if (fallback && image.src !== fallback) { setReady(false); image.src = fallback; } }} alt={frame.alt} loading={eager ? "eager" : "lazy"} fetchPriority={eager ? "high" : "auto"} decoding="async" />;
 }
 
 export function ProductShowcase({ watch }: { watch: Watch }) {
-  const frames = watch.detail.gallery;
+  const [variantId, setVariantId] = useState(watch.variants[0]?.id ?? "");
+  const selectedVariant = watch.variants.find((variant) => variant.id === variantId) ?? watch.variants[0];
+  const frames = selectedVariant ? [{ ...watch.detail.gallery[0], image: selectedVariant.image, alt: selectedVariant.alt }, ...watch.detail.gallery.slice(1)] : watch.detail.gallery;
   const [active, setActive] = useState(0);
   const [open, setOpen] = useState(false);
   const [zoom, setZoom] = useState(1);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
   const frame = frames[active] ?? frames[0];
 
-  useEffect(() => { setActive(0); setOpen(false); setZoom(1); }, [watch.slug]);
+  useEffect(() => { setVariantId(watch.variants[0]?.id ?? ""); setActive(0); setOpen(false); setZoom(1); }, [watch.slug, watch.variants]);
+  useEffect(() => { setActive(0); setOpen(false); setZoom(1); }, [variantId]);
   useEffect(() => {
     if (!open) return;
     const onKey = (event: KeyboardEvent) => {
@@ -50,7 +55,11 @@ export function ProductShowcase({ watch }: { watch: Watch }) {
             <span className="eyebrow">{watch.family} / {watch.reference}</span>
             <h1 id="product-title">{watch.name}<br /><em>{watch.short.replace(".", "")}</em></h1>
             <p>{watch.description}</p>
-            <dl className="product-showcase__availability"><div><dt>Availability</dt><dd>{watch.detail.availability.label}</dd></div><p>{watch.detail.availability.note}</p></dl>
+            {selectedVariant && <div className="product-showcase__configuration">
+              <div><span>Configuration</span><strong>{selectedVariant.label}</strong></div>
+              {watch.variants.length > 1 ? <div className="product-showcase__variant-list" role="group" aria-label={`${watch.name} photographed configurations`}>{watch.variants.map((variant) => <button type="button" key={variant.id} className={variant.id === selectedVariant.id ? "is-active" : ""} onClick={() => setVariantId(variant.id)} aria-pressed={variant.id === selectedVariant.id}>{variant.label}</button>)}</div> : <p>Presented as photographed. Additional configurations appear only with a dedicated campaign study.</p>}
+            </div>}
+            <dl className="product-showcase__availability"><div><dt>Availability</dt><dd>{watch.detail.availability.label}</dd></div><p>{selectedVariant?.availabilityNote ?? watch.detail.availability.note}</p></dl>
             <div className="product-showcase__actions"><Link href="/inquiry" className="product-action product-action--primary">{watch.detail.availability.action}</Link><Link href="/bespoke" className="product-action">Private selection</Link></div>
             <dl className="product-showcase__hero-specs"><div><dt>Case</dt><dd>{watch.case}</dd></div><div><dt>Calibre</dt><dd>{watch.movement}</dd></div><div><dt>Reserve</dt><dd>{watch.reserve}</dd></div></dl>
           </div>

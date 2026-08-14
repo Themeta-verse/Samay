@@ -140,6 +140,23 @@
 - [x] Final TypeScript and production builds pass, with no recent browser-console errors or failed network requests on the product routes.
 - [x] The production build retains only the known non-blocking bundle-size advisory; critical hero image uses eager/high-priority loading and noncritical gallery rail frames remain deferred.
 
+## Variant, concierge, and gallery-feedback pass — unchecked work
+
+- [x] Audit the current product data and durable campaign assets to identify only genuinely image-backed variant combinations.
+- [ ] Add additional photographed variants and activate multi-option switching when dedicated campaign studies are supplied. The current product model presents one verified configuration per reference without visual substitution.
+- [x] Inspect the approved concierge integration configuration and choose a secure supported submission path.
+- [x] Keep inquiry and private-viewing forms validated with an explicit no-send handoff while an approved concierge workflow is unavailable.
+- [x] Add image loading states, gallery hover cues, inspection-control feedback, and reduced-motion behavior without distracting animation.
+- [x] Verify desktop/mobile photographed-configuration presentation, gallery inspection, form states, accessibility signals, console/network behavior, and production build.
+
 - [x] Desktop recheck confirms every gallery, movement, material, craft, and related-watch image panel is now populated with stable SAMAY campaign imagery.
 - [x] Mobile recheck confirms the top product order, request controls, gallery rail, technical ledger, and related-watch route are readable at 390px.
 - [x] The mobile full-page capture no longer suppresses lower technical imagery after promoting product-story, craft, and related-watch images to eager loading.
+- [x] The additional campaign studies are inspection frames rather than credible alternate watch configurations; no real photographed variant set is available for a faithful variant picker.
+- [x] No approved concierge/CRM/email/webhook connector is configured. The only potentially relevant connector, Typeform, is disabled and no custom connector exists.
+- [x] Gallery load fades, hover cues, inspection-control feedback, and reduced-motion fallbacks pass TypeScript and production-build validation.
+- [x] Add a configuration-ready product-data contract that records only the currently photographed state and leaves unrepresented selections unavailable.
+- [x] Strengthen the private-viewing forms with a clear, accurate no-send concierge handoff and explicit integration-readiness notes.
+- [x] Add `docs/concierge-handoff.md` with the secure server-side dispatch boundary, field contract, approval criteria, and truthful acknowledgement rules.
+- [x] Apply the visual-review refinements: distinct exhibition chapter language per reference, evidence-first Serein crop treatment, ivory editorial anchors, and a more legible aperture-led SAMAY lockup.
+- [x] Capture product-route desktop/mobile QA and inquiry/bespoke mobile QA; no recent client-console errors or failed network requests were detected.
