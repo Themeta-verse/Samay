@@ -208,3 +208,6 @@
 - [x] Retry the authorized GitHub push of the completed owner-review activation commits and verify `Themeta-verse/Samay` `main` after the owner’s renewed access approval.
 - [x] Exhaust safe, authenticated GitHub delivery paths for the owner-approved SAMAY commits without exposing credentials, weakening repository security, or rewriting `main` history.
 - [x] Replace all public SAMAY contact references with the user-approved `himanshut2610@gmail.com` email address and `7977374705` phone number, then verify and publish the correction.
+- [x] Add a truthful contact form that prepares a prefilled email to the approved Gmail address, with clear local validation and no false server-delivery claim.
+- [x] Add accessible click-to-copy email feedback, direct telephone dialing, and clearly labelled LinkedIn/X social-profile placeholders beside the public contact details.
+- [x] Add focused tests and responsive visual validation for the new contact interactions, then publish the verified update.
