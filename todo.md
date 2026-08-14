@@ -184,7 +184,7 @@
 - [x] Identify owner-independent appointment, concierge, gallery, and configuration improvements that do not require invented schedules, delivery destinations, or product assets.
 - [x] Implement the safe enhancements with clear availability semantics, accessible controls, and preserved contact fallback behavior.
 - [x] Route validated private-viewing and bespoke submissions through the built-in project-owner notification channel when no external concierge endpoint is configured, with truthful review-not-confirmation language.
-- [ ] Validate the expanded flows across desktop and mobile, then publish with a precise record of any remaining external prerequisites.
+- [x] Validate the expanded flows across desktop and mobile, then publish with a precise record of any remaining external prerequisites.
 
 - [x] Re-audit the approved Google Calendar, concierge, project-secret, and durable asset sources for owner-configured production inputs. No SAMAY-labelled calendar availability, configured concierge destination, project secrets, or alternate exterior configuration photography is present; four matched product-detail studies were verified and moved to durable gallery storage.
 - [x] Activate only verified booking links, approved delivery endpoints, and genuinely configuration-specific product images discovered through the authorized sources. The verified Meridian dial/caseback, Serein bracelet, and Vesper caseback studies now enrich their own reference galleries; no unverified booking, delivery, or configuration path was activated.
