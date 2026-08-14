@@ -55,3 +55,4 @@
 .samay-app .form-handoff--dark > span { color: var(--champagne); }
 .samay-app .form-handoff--dark p { color: var(--ash); }
 .samay-app .form-error--dark { margin: -10px 0 0; color: #e8b0a4; font-size: 12px; }
+.samay-app .request-confirmation__appointment { margin: 0 0 26px; }

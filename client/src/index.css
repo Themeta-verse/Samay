@@ -25,6 +25,7 @@
 .section-paper .eyebrow { color: #71756e; }
 .skip-link { position: fixed; z-index: 100; top: -60px; left: 24px; padding: 10px 15px; background: var(--ivory); color: var(--obsidian); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; transition: top .2s var(--ease-out); }
 .skip-link:focus { top: 20px; }
+.route-loading { display: grid; min-height: 100vh; place-items: center; background: var(--obsidian); color: var(--champagne); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; }
 
 /* Shell */
 .site-header { position: fixed; z-index: 40; inset: 0 0 auto; color: var(--ivory); transition: background .35s ease, color .35s ease; }
@@ -374,6 +375,7 @@ h3 { font-size: 2rem; letter-spacing: -.025em; }
 .inquiry-success__mark { display: flex; align-items: center; justify-content: center; width: 49px; height: 49px; margin-bottom: 35px; border: 1px solid var(--champagne); color: var(--champagne); }
 .inquiry-success h2 { margin: 31px 0 25px; }
 .inquiry-success p { max-width: 430px; margin-bottom: 34px; color: #6b7069; }
+.inquiry-success__appointment { margin: 0 0 25px; }
 .inquiry-details { padding: 80px 9vw 90px; }
 .inquiry-details__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; max-width: 1120px; margin: 0 auto; }
 .inquiry-details__grid p { margin: 17px 0 0; color: rgba(231,225,215,.7); font-size: 12px; line-height: 1.75; }

@@ -142,6 +142,18 @@
 
 ## Variant, concierge, and gallery-feedback pass — unchecked work
 
+## Connected concierge, appointment availability, and real variants — active work
+
+- [x] Audit the currently approved concierge destination, appointment-calendar source, and durable alternate-configuration photography. No custom concierge destination or newly supplied alternate-configuration assets are present; Cal.com, Calendly, Google Calendar, CalendarBridge, and Typeform are available but disabled.
+- [x] Select Google Calendar as the intended appointment-availability provider.
+- [ ] Obtain the Google Calendar account connection, target calendar, visit duration, operating hours, minimum notice, timezone, and cancellation policy.
+- [x] Upgrade the project for secure server-side integration routes and create owner-configurable appointment and concierge environment boundaries.
+- [x] Add an elegant appointment entry surface that remains explicitly unavailable until an approved Google Appointment Schedule URL is configured.
+- [x] Add validated server-side payload contracts and truthful no-dispatch responses until an approved concierge destination is configured.
+- [ ] Confirm the production submission contract, appointment availability rules, and each configuration’s authentic asset mapping.
+- [ ] Implement secure concierge request delivery, direct appointment scheduling, and image-backed multi-option product switching.
+- [ ] Validate connected success and failure paths, availability selection, responsive product behavior, accessibility, and production build before publishing.
+
 - [x] Audit the current product data and durable campaign assets to identify only genuinely image-backed variant combinations.
 - [ ] Add additional photographed variants and activate multi-option switching when dedicated campaign studies are supplied. The current product model presents one verified configuration per reference without visual substitution.
 - [x] Inspect the approved concierge integration configuration and choose a secure supported submission path.
@@ -160,3 +172,13 @@
 - [x] Add `docs/concierge-handoff.md` with the secure server-side dispatch boundary, field contract, approval criteria, and truthful acknowledgement rules.
 - [x] Apply the visual-review refinements: distinct exhibition chapter language per reference, evidence-first Serein crop treatment, ivory editorial anchors, and a more legible aperture-led SAMAY lockup.
 - [x] Capture product-route desktop/mobile QA and inquiry/bespoke mobile QA; no recent client-console errors or failed network requests were detected.
+
+## All-out production pass — optional integrations and verified delivery
+
+- [x] Keep booking and concierge integrations fully optional, server-configured, URL-validated, and hidden when absent; preserve the existing contact route as the truthful fallback.
+- [x] Resolve the full-stack server runtime dependency error, restart the application, and verify a clean boot before treating the integration foundation as complete.
+- [x] Run and record TypeScript, unit-test, production-build, and live-flow checks for the configuration-gated appointment and concierge behavior.
+- [x] Re-verify the private-viewing and bespoke flows: hidden booking when absent, visible contact fallback, truthful no-dispatch responses, and no client-exposed secrets.
+- [x] Complete visual, responsive, accessibility, performance, security, SEO, and regression refinement without fabricating product, booking, or concierge behavior.
+- [x] Reduce initial JavaScript transfer through route-level loading boundaries and complete metadata/robot directives without changing the editorial presentation.
+- [ ] Audit the existing `Themeta-verse/Samay` remote, commit only the completed production-pass changes, push to that repository, and verify the remote commit.
