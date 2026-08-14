@@ -205,3 +205,5 @@
 - [x] Audit the existing `Themeta-verse/Samay` remote, commit only the completed production-pass changes, push to that repository, and verify the remote commit.
 - [x] Verify the prepared `6e68e1e` SAMAY commit is present on the remote `main` branch.
 - [x] Create a temporary repository-scoped SSH deploy key with user approval, use it only for the verified SAMAY `main` delivery, and revoke it immediately afterward.
+- [x] Retry the authorized GitHub push of the completed owner-review activation commits and verify `Themeta-verse/Samay` `main` after the owner’s renewed access approval.
+- [x] Exhaust safe, authenticated GitHub delivery paths for the owner-approved SAMAY commits without exposing credentials, weakening repository security, or rewriting `main` history.
