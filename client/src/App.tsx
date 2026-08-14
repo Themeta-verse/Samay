@@ -1,42 +1,26 @@
+// Atelier Obsidian reminder: route through one restrained gallery shell so every page has an escape route and a consistent rhythm.
+
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { SiteShell } from "./components/SiteShell";
 import Home from "./pages/Home";
-
+import Collection from "./pages/Collection";
+import WatchDetail from "./pages/WatchDetail";
+import Journal from "./pages/Journal";
+import JournalArticle from "./pages/JournalArticle";
+import Atelier from "./pages/Atelier";
+import Inquiry from "./pages/Inquiry";
+import NotFound from "./pages/NotFound";
 
 function Router() {
-  return (
-    <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
-  );
+  return <Switch><Route path="/" component={Home} /><Route path="/collection" component={Collection} /><Route path="/watch/:slug" component={WatchDetail} /><Route path="/journal" component={Journal} /><Route path="/journal/:slug" component={JournalArticle} /><Route path="/atelier" component={Atelier} /><Route path="/inquiry" component={Inquiry} /><Route path="/404" component={NotFound} /><Route component={NotFound} /></Switch>;
 }
 
-// NOTE: About Theme
-// - First choose a default theme according to your design style (dark or light bg), than change color palette in index.css
-//   to keep consistent foreground/background color across components
-// - If you want to make theme switchable, pass `switchable` ThemeProvider and use `useTheme` hook
-
 function App() {
-  return (
-    <ErrorBoundary>
-      <ThemeProvider
-        defaultTheme="light"
-        // switchable
-      >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
-  );
+  return <ErrorBoundary><ThemeProvider defaultTheme="dark"><TooltipProvider><Toaster /><SiteShell><Router /></SiteShell></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }
 
 export default App;

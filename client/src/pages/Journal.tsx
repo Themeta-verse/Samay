@@ -1,0 +1,11 @@
+// Atelier Obsidian reminder: editorial pages should read like a considered publication, not a content dashboard.
+
+import { ArrowUpRight } from "lucide-react";
+import { Link } from "wouter";
+import { SectionLabel } from "@/components/SiteShell";
+import { journalEntries } from "@/lib/samayData";
+
+export default function Journal() {
+  const [lead, ...rest] = journalEntries;
+  return <div className="journal-page section-paper"><section className="page-intro section-dark"><div className="page-intro__inner"><SectionLabel index="01" dark>Journal / Notes from the house</SectionLabel><div className="page-intro__grid"><h1>The discipline<br /><em>of time.</em></h1><p>Essays on proportion, finishing, movement, and the quiet decisions that make a watch feel inevitable.</p></div><div className="page-intro__bottom"><span>Issue 01 / 2026</span><span>Three notes</span><span>Read at your own pace</span></div></div></section><section className="journal-list section-wrap"><Link href={`/journal/${lead.slug}`} className="journal-lead"><div className="journal-lead__image"><img src={lead.image} alt="" /></div><div className="journal-lead__copy"><span className="eyebrow">{lead.index} / {lead.category} · {lead.date}</span><h2>{lead.title}</h2><p>{lead.excerpt}</p><span className="text-link">Read the note <ArrowUpRight size={14} strokeWidth={1.2} /></span></div></Link><div className="journal-list__rule" /><div className="journal-list__grid">{rest.map((entry) => <Link key={entry.slug} href={`/journal/${entry.slug}`} className="journal-article-card"><div className="journal-article-card__image"><img src={entry.image} alt="" loading="lazy" /></div><div className="journal-article-card__meta"><span>{entry.index} / {entry.category}</span><span>{entry.date}</span></div><h3>{entry.title}</h3><p>{entry.excerpt}</p><span className="text-link">Read the note <ArrowUpRight size={14} strokeWidth={1.2} /></span></Link>)}</div></section><section className="journal-note section-dark"><div className="journal-note__inner"><span className="eyebrow">A slower kind of reading</span><h2>Objects are<br /><em>arguments.</em></h2><p>The journal follows the same measure as the collection: less volume, more attention.</p></div></section></div>;
+}
