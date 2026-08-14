@@ -207,3 +207,4 @@
 - [x] Create a temporary repository-scoped SSH deploy key with user approval, use it only for the verified SAMAY `main` delivery, and revoke it immediately afterward.
 - [x] Retry the authorized GitHub push of the completed owner-review activation commits and verify `Themeta-verse/Samay` `main` after the owner’s renewed access approval.
 - [x] Exhaust safe, authenticated GitHub delivery paths for the owner-approved SAMAY commits without exposing credentials, weakening repository security, or rewriting `main` history.
+- [x] Replace all public SAMAY contact references with the user-approved `himanshut2610@gmail.com` email address and `7977374705` phone number, then verify and publish the correction.

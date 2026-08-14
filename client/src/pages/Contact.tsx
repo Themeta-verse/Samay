@@ -1,7 +1,60 @@
 /* Atelier Obsidian: contact stays simple, direct, and honest about the request pathway. */
 import { Mail, MapPin, Phone } from "lucide-react";
 import { ArrowLink, SectionLabel } from "@/components/SiteShell";
+import { samayContact } from "@/lib/samayContact";
 
 export default function Contact() {
-  return <div className="flagship-page contact-page"><section className="contact-hero section-dark"><div className="section-wrap contact-hero__grid"><div><SectionLabel index="01" dark>Contact the house</SectionLabel><h1>A considered<br /><em>conversation.</em></h1><p>For a private viewing, service question, bespoke selection, or simply a question about the object.</p></div><div className="contact-hero__aside"><span className="eyebrow">By appointment</span><p>Begin with the request flow and frame the question you would like to bring to the house.</p><ArrowLink href="/inquiry" dark>Prepare a private viewing</ArrowLink></div></div></section><section className="contact-details section-paper"><div className="section-wrap"><SectionLabel index="02">Ways to begin</SectionLabel><div className="contact-details__grid"><a href="mailto:himanshut2610@gmail.com"><Mail size={18} strokeWidth={1.1} /><span>Private viewing<br /><small>himanshut2610@gmail.com</small></span></a><a href="tel:7977374705"><Phone size={18} strokeWidth={1.1} /><span>Conversation by appointment<br /><small>7977374705</small></span></a><div><MapPin size={18} strokeWidth={1.1} /><span>Geneva · Paris · New York<br /><small>SAMAY house salons</small></span></div></div></div></section><section className="contact-close section-dark"><div className="section-wrap contact-close__grid"><div><span className="eyebrow">No forms for the sake of forms</span><h2>Start where<br /><em>the question is.</em></h2></div><div><p>If the question is about a reference, begin with the collection. If it is about care, begin with service. If it is about a future object, begin with bespoke.</p><div className="contact-close__links"><ArrowLink href="/collection" dark>Collection</ArrowLink><ArrowLink href="/service" dark>Service</ArrowLink><ArrowLink href="/bespoke" dark>Bespoke</ArrowLink></div></div></div></section></div>;
+  return (
+    <div className="flagship-page contact-page">
+      <section className="contact-hero section-dark">
+        <div className="section-wrap contact-hero__grid">
+          <div>
+            <SectionLabel index="01" dark>Contact the house</SectionLabel>
+            <h1>A considered<br /><em>conversation.</em></h1>
+            <p>For a private viewing, service question, bespoke selection, or simply a question about the object.</p>
+          </div>
+          <div className="contact-hero__aside">
+            <span className="eyebrow">By appointment</span>
+            <p>Begin with the request flow and frame the question you would like to bring to the house.</p>
+            <ArrowLink href="/inquiry" dark>Prepare a private viewing</ArrowLink>
+          </div>
+        </div>
+      </section>
+      <section className="contact-details section-paper">
+        <div className="section-wrap">
+          <SectionLabel index="02">Ways to begin</SectionLabel>
+          <div className="contact-details__grid">
+            <a href={samayContact.emailHref}>
+              <Mail size={18} strokeWidth={1.1} />
+              <span>Private viewing<br /><small>{samayContact.email}</small></span>
+            </a>
+            <a href={samayContact.phoneHref}>
+              <Phone size={18} strokeWidth={1.1} />
+              <span>Conversation by appointment<br /><small>{samayContact.phone}</small></span>
+            </a>
+            <div>
+              <MapPin size={18} strokeWidth={1.1} />
+              <span>Geneva · Paris · New York<br /><small>SAMAY house salons</small></span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className="contact-close section-dark">
+        <div className="section-wrap contact-close__grid">
+          <div>
+            <span className="eyebrow">No forms for the sake of forms</span>
+            <h2>Start where<br /><em>the question is.</em></h2>
+          </div>
+          <div>
+            <p>If the question is about a reference, begin with the collection. If it is about care, begin with service. If it is about a future object, begin with bespoke.</p>
+            <div className="contact-close__links">
+              <ArrowLink href="/collection" dark>Collection</ArrowLink>
+              <ArrowLink href="/service" dark>Service</ArrowLink>
+              <ArrowLink href="/bespoke" dark>Bespoke</ArrowLink>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
