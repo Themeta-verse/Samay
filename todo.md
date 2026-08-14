@@ -181,4 +181,6 @@
 - [x] Re-verify the private-viewing and bespoke flows: hidden booking when absent, visible contact fallback, truthful no-dispatch responses, and no client-exposed secrets.
 - [x] Complete visual, responsive, accessibility, performance, security, SEO, and regression refinement without fabricating product, booking, or concierge behavior.
 - [x] Reduce initial JavaScript transfer through route-level loading boundaries and complete metadata/robot directives without changing the editorial presentation.
-- [ ] Audit the existing `Themeta-verse/Samay` remote, commit only the completed production-pass changes, push to that repository, and verify the remote commit.
+- [x] Audit the existing `Themeta-verse/Samay` remote, commit only the completed production-pass changes, push to that repository, and verify the remote commit.
+- [x] Verify the prepared `6e68e1e` SAMAY commit is present on the remote `main` branch.
+- [x] Create a temporary repository-scoped SSH deploy key with user approval, use it only for the verified SAMAY `main` delivery, and revoke it immediately afterward.
