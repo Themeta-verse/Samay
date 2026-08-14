@@ -1,6 +1,13 @@
-import { afterEach, describe, expect, it } from "vitest";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { deliverConciergeRequest, getAppointmentConfiguration } from "./samayIntegrations";
+
+vi.mock("./_core/notification", () => ({
+  notifyOwner: vi.fn(),
+}));
+
+import { notifyOwner } from "./_core/notification";
+
+const notifyOwnerMock = vi.mocked(notifyOwner);
 
 const originalBookingUrl = process.env.SAMAY_GOOGLE_BOOKING_PAGE_URL;
 const originalConciergeUrl = process.env.SAMAY_CONCIERGE_WEBHOOK_URL;
@@ -27,6 +34,7 @@ afterEach(() => {
   }
 
   globalThis.fetch = originalFetch;
+  notifyOwnerMock.mockReset();
 });
 
 describe("Google Calendar appointment configuration", () => {
@@ -58,10 +66,11 @@ describe("Google Calendar appointment configuration", () => {
 });
 
 describe("concierge delivery configuration", () => {
-  it("does not dispatch or retain a request when no approved endpoint is configured", async () => {
+  it("uses the approved project-owner review channel when no external endpoint is configured", async () => {
     delete process.env.SAMAY_CONCIERGE_WEBHOOK_URL;
     const fetchSpy = vi.fn();
     globalThis.fetch = fetchSpy as typeof fetch;
+    notifyOwnerMock.mockResolvedValue(true);
 
     await expect(
       deliverConciergeRequest({
@@ -71,15 +80,36 @@ describe("concierge delivery configuration", () => {
         city: "Paris",
         reference: "Meridian",
       }),
-    ).resolves.toEqual({ delivery: "not_configured" });
+    ).resolves.toEqual({ delivery: "owner_notified" });
 
     expect(fetchSpy).not.toHaveBeenCalled();
+    expect(notifyOwnerMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        title: "SAMAY / Private viewing request",
+        content: expect.stringContaining("Reference: Meridian"),
+      }),
+    );
   });
 
-  it("rejects non-HTTPS concierge endpoints without dispatching", async () => {
+  it("keeps the contact fallback when owner review is unavailable", async () => {
+    delete process.env.SAMAY_CONCIERGE_WEBHOOK_URL;
+    notifyOwnerMock.mockResolvedValue(false);
+
+    await expect(
+      deliverConciergeRequest({
+        kind: "bespoke_selection",
+        name: "A. Collector",
+        email: "collector@example.com",
+        reference: "Vesper",
+      }),
+    ).resolves.toEqual({ delivery: "not_configured" });
+  });
+
+  it("rejects non-HTTPS concierge endpoints without exposing an unapproved URL", async () => {
     process.env.SAMAY_CONCIERGE_WEBHOOK_URL = "http://example.com/concierge";
     const fetchSpy = vi.fn();
     globalThis.fetch = fetchSpy as typeof fetch;
+    notifyOwnerMock.mockResolvedValue(false);
 
     await expect(
       deliverConciergeRequest({

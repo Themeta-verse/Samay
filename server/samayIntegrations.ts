@@ -1,3 +1,5 @@
+import { notifyOwner } from "./_core/notification";
+
 export type ConciergeRequest = {
   kind: "private_viewing" | "bespoke_selection";
   name: string;
@@ -13,7 +15,7 @@ export type ConciergeRequest = {
   };
 };
 
-type DeliveryState = "sent" | "not_configured" | "failed";
+export type DeliveryState = "sent" | "owner_notified" | "not_configured" | "failed";
 
 function toApprovedHttpsUrl(value: string | undefined) {
   if (!value?.trim()) return null;
@@ -45,9 +47,47 @@ export function getAppointmentConfiguration() {
   };
 }
 
+function formatOwnerReview(request: ConciergeRequest) {
+  const selection = request.selection
+    ? [
+        `Case: ${request.selection.case}`,
+        `Dial: ${request.selection.dial}`,
+        `Strap: ${request.selection.strap}`,
+        request.selection.occasion ? `Occasion: ${request.selection.occasion}` : null,
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : null;
+
+  return [
+    `Name: ${request.name}`,
+    `Email: ${request.email}`,
+    request.city ? `City: ${request.city}` : null,
+    `Reference: ${request.reference}`,
+    request.message ? `Note: ${request.message}` : null,
+    selection,
+    "\nThis is a request for review only. No appointment or order has been confirmed.",
+  ]
+    .filter(Boolean)
+    .join("\n");
+}
+
+async function notifyOwnerForReview(request: ConciergeRequest): Promise<DeliveryState> {
+  try {
+    const accepted = await notifyOwner({
+      title: `SAMAY / ${request.kind === "private_viewing" ? "Private viewing" : "Private selection"} request`,
+      content: formatOwnerReview(request),
+    });
+
+    return accepted ? "owner_notified" : "not_configured";
+  } catch {
+    return "not_configured";
+  }
+}
+
 export async function deliverConciergeRequest(request: ConciergeRequest): Promise<{ delivery: DeliveryState }> {
   const endpoint = toApprovedHttpsUrl(process.env.SAMAY_CONCIERGE_WEBHOOK_URL);
-  if (!endpoint) return { delivery: "not_configured" };
+  if (!endpoint) return { delivery: await notifyOwnerForReview(request) };
 
   const token = process.env.SAMAY_CONCIERGE_WEBHOOK_TOKEN?.trim();
   const controller = new AbortController();
