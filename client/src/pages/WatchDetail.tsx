@@ -31,7 +31,7 @@ export default function WatchDetail() {
             <div className="watch-stage__frame"><img src={watch.image} alt={`${watch.name} ${watch.reference} watch`} /><span className="watch-stage__annotation">Object / {watch.reference}</span></div>
             <div className="watch-stage__under"><span>Exterior / 01</span><span>Scroll to examine</span></div>
           </div>
-          <div className="watch-hero__copy"><span className="eyebrow">{watch.reference} · {watch.family}</span><h1>{watch.name}<br /><em>{watch.short.replace(".", "")}</em></h1><p>{watch.description}</p><div className="watch-hero__price"><span>Availability</span><strong>{watch.price}</strong></div><ArrowLink href="/inquiry" dark>Request this reference</ArrowLink><div className="watch-hero__facts"><div><span>Case</span><strong>{watch.case}</strong></div><div><span>Movement</span><strong>{watch.movement}</strong></div><div><span>Reserve</span><strong>{watch.reserve}</strong></div></div></div>
+          <div className="watch-hero__copy"><span className="eyebrow">{watch.reference} · {watch.family}</span><h1>{watch.name}<br /><em>{watch.short.replace(".", "")}</em></h1><p>{watch.description}</p><div className="watch-hero__price"><span>Availability</span><strong>{watch.price}</strong></div><div className="watch-hero__actions"><ArrowLink href="/inquiry" dark>Request this reference</ArrowLink><ArrowLink href="/bespoke" dark>Configure quietly</ArrowLink></div><div className="watch-hero__facts"><div><span>Case</span><strong>{watch.case}</strong></div><div><span>Movement</span><strong>{watch.movement}</strong></div><div><span>Reserve</span><strong>{watch.reserve}</strong></div></div></div>
         </div>
       </div>
     </section>

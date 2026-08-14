@@ -23,3 +23,28 @@
 - [x] Keep the new signature campaign carriers eager-loaded where they are central to the exhibition narrative; retain lazy loading for secondary journal imagery.
 - [x] Mobile QA confirms the new collection interlude, watch examination rail, atelier gallery, inquiry form, and responsive typography hold their intended hierarchy at 390px.
 - [x] The home journal preview was the remaining capture-hostile image group; its three editorial cards are now eager-loaded as part of the visible opening narrative.
+
+## Full flagship expansion — unchecked work
+
+- [x] Audit the complete brief against the current route map and keep the expansion coherent rather than page-count driven.
+- [x] Define the flagship information architecture for home, collection, watch detail, craft, movement, atelier, materials, journal, bespoke, boutique, service, about, and contact.
+- [x] Extend the content model with credible fictional maison data for materials, movement specifications, service promises, boutique appointments, and bespoke options without inventing reviews, awards, press, or historical claims.
+- [x] Prepare or generate only the additional visual assets needed for macro material studies, movement/caseback, boutique atmosphere, service, and bespoke presentation.
+- [x] Upgrade the home journey with material, movement, craft, philosophy, collection preview, journal, and appointment moments while preserving minimal copy and negative space.
+- [x] Add a restrained global discovery/navigation layer for the expanded flagship routes.
+- [x] Deepen watch detail with structured case, dial, movement, strap, water-resistance, gallery, craft, availability, and multi-image inspection states.
+- [x] Add a tactile product configurator that updates the watch presentation without becoming a dashboard.
+- [x] Build movement and material-library experiences with editorial explanations and real technical vocabulary.
+- [x] Add bespoke, boutique, service, about, and contact journeys with clear, trustworthy forms and no fake social proof.
+- [x] Expand the journal with concise, specific editorial pieces and avoid generic AI blog language.
+- [x] Verify desktop/mobile art direction, motion restraint, accessibility, route escape paths, and production build quality across the full ecosystem.
+- [ ] Save a new expanded checkpoint and report practical launch steps.
+
+## Flagship QA findings
+
+- [x] Desktop visual review confirms the expanded routes preserve Atelier Obsidian: graphite stages, warm ivory editorial fields, champagne rules, material photography, and quiet catalogue metadata remain coherent.
+- [x] Independent style review recommends shipping the visual system without further aesthetic changes.
+- [x] Mobile visual QA confirms the new movement, materials, bespoke, boutique, service, about, and contact routes stack cleanly with readable type, stable image framing, and usable form controls.
+- [x] Run one final production build after any last copy or interaction adjustments, then save the expanded flagship checkpoint.
+- [x] Route coverage audit confirms the flagship page set is present: home, collection, watch detail, craft, movement, materials, atelier, journal, bespoke, boutique, service, about, contact, inquiry, and journal article.
+- [x] Final `pnpm check` and production build pass; Vite reports only the existing bundle-size advisory, with no TypeScript or build errors.
