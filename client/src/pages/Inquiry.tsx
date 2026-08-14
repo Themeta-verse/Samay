@@ -15,8 +15,9 @@ export default function Inquiry() {
     const form = new FormData(event.currentTarget);
     const name = String(form.get("name") ?? "").trim();
     const email = String(form.get("email") ?? "").trim();
-    if (!name || !email || !email.includes("@")) {
-      setError("Please include your name and a valid email address.");
+    const city = String(form.get("city") ?? "").trim();
+    if (!name || !city || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError("Please include your name, city, and a valid email address.");
       return;
     }
     setError("");
