@@ -34,3 +34,20 @@
   .bespoke-hero { padding: 85px 0 72px; }.bespoke-summary h2 { margin-top: 35px; }.bespoke-request__grid { grid-template-columns: 1fr; gap: 55px; }.bespoke-request__grid h2, .request-confirmation h2 { margin-top: 35px; }.boutique-hero__image { min-height: 390px; }.boutique-list__head { grid-template-columns: 1fr; gap: 28px; margin-top: 42px; }.boutique-cards { grid-template-columns: 1fr; margin-top: 55px; }.boutique-card { min-height: 280px; }.boutique-card h3 { margin-top: 35px; }.service-hero { padding-top: 85px; }.service-hero h1 { margin-top: 40px; }.service-principles__grid { grid-template-columns: 1fr 1fr; }.service-principles__grid article { min-height: 250px; }.service-accordion summary { font-size: 20px; }
   .about-hero, .contact-hero { min-height: 510px; padding: 125px 28px 85px; }.about-principles__grid { grid-template-columns: 1fr; }.about-principles__grid article { min-height: 170px; }.about-principles__grid h3 { margin: 30px 0 12px; }.about-close { padding: 85px 0 95px; }.contact-details__grid { grid-template-columns: 1fr; gap: 28px; margin-top: 52px; }.contact-hero__aside { padding-bottom: 0; }.contact-close__links { gap: 18px; }
 }
+
+/* Final visual polish: warm reading fields stay tied to the graphite house through dark object cards and measured champagne signals. */
+.samay-app :is(.boutique-card, .contact-details__grid > div) {
+  background: var(--graphite);
+  color: var(--ivory);
+  border-top: 1px solid var(--champagne);
+  box-shadow: inset 0 0 0 1px rgba(183,157,112,.08);
+}
+.samay-app :is(.boutique-card p, .contact-details__grid small) { color: var(--ash); }
+.samay-app :is(.boutique-card > svg, .contact-details__grid svg) { color: var(--champagne); }
+.samay-app :is(.section-label__index, .section-label::before, .eyebrow, .discover-panel__index, .hero__rail-line) { color: var(--champagne); }
+.samay-app :is(.section-label::after, .section-label__rule, .site-footer__bottom, .contact-details__grid > div, .boutique-card) { border-color: rgba(183,157,112,.46); }
+.samay-app .brand-name { letter-spacing: .24em; font-variant: small-caps; }
+.samay-app .brand-name__initial { display: inline-block; position: relative; margin-right: -.02em; font-style: italic; transform: skewX(-10deg); }
+.samay-app .brand-name__initial::after { content: ""; position: absolute; left: 42%; bottom: -.16em; width: .42em; height: 1px; background: var(--champagne); transform: rotate(-28deg); }
+.samay-app :is(.contact-details__grid > div, .boutique-card) { transition: transform .22s var(--ease-out), border-color .22s var(--ease-out), background-color .22s var(--ease-out); }
+.samay-app :is(.contact-details__grid > div, .boutique-card):hover { transform: translateY(-4px); border-color: var(--champagne); background: #202421; }

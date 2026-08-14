@@ -1,0 +1,207 @@
+/* Atelier Obsidian structural system: one measured grid, two editorial modes, explicit image roles, and responsive recomposition. */
+
+:root {
+  --samay-content-max: 1320px;
+  --samay-content-gutter: clamp(20px, 5vw, 82px);
+  --samay-section-space: clamp(78px, 10vw, 150px);
+  --samay-layout-gap: clamp(32px, 7vw, 112px);
+  --samay-copy-max: 42rem;
+  --samay-rule: rgba(183, 157, 112, .3);
+}
+
+.samay-app {
+  min-width: 0;
+  overflow-x: clip;
+}
+
+.samay-app .samay-container,
+.samay-app .section-wrap {
+  width: min(calc(100% - (var(--samay-content-gutter) * 2)), var(--samay-content-max));
+  margin-inline: auto;
+}
+
+.samay-app .section-wrap {
+  max-width: var(--samay-content-max);
+}
+
+.samay-app :is(.manifesto, .featured, .journal-preview, .collection-list, .collection-note, .watch-story, .watch-specs, .materials-section, .related, .journal-list, .journal-note, .article-body, .article-related, .atelier-manifesto, .craft-sequence, .atelier-contact, .inquiry-form-section, .inquiry-details, .craft-intro, .movement-reading, .materials-close, .about-reading, .contact-details, .service-details, .boutique-list, .bespoke-workbench, .craft-steps-page, .material-library, .service-principles, .about-principles, .boutique-note, .contact-close, .bespoke-request) {
+  padding-block: var(--samay-section-space);
+}
+
+.samay-app :is(.page-intro, .article-hero, .inquiry-hero, .bespoke-hero, .materials-hero, .service-hero) {
+  padding-top: clamp(124px, 12vw, 176px);
+  padding-bottom: clamp(58px, 7vw, 104px);
+}
+
+.samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+  min-height: clamp(560px, 52vw, 760px);
+  isolation: isolate;
+}
+
+.samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split).editorial-split--reverse > :first-child {
+  order: 2;
+}
+
+.samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > :is([class*="__image"], .image-frame) {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(500px, 52vw, 760px);
+  overflow: hidden;
+  background: var(--graphite);
+}
+
+.samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > :is([class*="__image"], .image-frame) :is(img, .image-frame__img, .atelier-hero__image-source) {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  object-position: center;
+}
+
+.samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > [class*="__copy"] {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  padding: clamp(72px, 9vw, 150px) clamp(28px, 8vw, 130px);
+}
+
+.samay-app .editorial-split--paper {
+  background: var(--paper);
+  color: var(--obsidian);
+}
+
+.samay-app .editorial-split--dark {
+  background: var(--obsidian);
+  color: var(--ivory);
+}
+
+.samay-app .image-frame {
+  isolation: isolate;
+}
+
+.samay-app .image-frame__img {
+  position: relative;
+  z-index: 0;
+}
+
+.samay-app .image-frame--hero,
+.samay-app .image-frame--product,
+.samay-app .image-frame--macro,
+.samay-app .image-frame--movement,
+.samay-app .image-frame--architectural,
+.samay-app .image-frame--editorial {
+  contain: paint;
+}
+
+.samay-app :is(.product-card__image, .watch-stage__frame, .journal-lead__image, .journal-article-card__image, .article-image, .materials-section__stage, .bespoke-preview, .materials-hero__image, .service-hero__image, .craft-gallery__image, .craft-gallery__detail) {
+  overflow: hidden;
+  background: var(--graphite);
+}
+
+.samay-app :is(.product-card__image, .watch-stage__frame, .journal-lead__image, .journal-article-card__image, .article-image, .materials-section__stage, .bespoke-preview, .materials-hero__image, .service-hero__image, .craft-gallery__image, .craft-gallery__detail) img {
+  display: block;
+  width: 100%;
+}
+
+.samay-app .hero {
+  min-height: clamp(700px, 88svh, 920px);
+}
+
+.samay-app .hero__image {
+  object-position: 58% center;
+}
+
+.samay-app .hero__content {
+  max-width: 560px;
+}
+
+.samay-app :is(.manifesto, .featured, .journal-preview, .collection-list, .watch-story, .watch-specs, .materials-section, .related, .journal-list, .article-body, .atelier-manifesto, .craft-sequence, .atelier-contact, .inquiry-form-section, .craft-intro, .movement-reading, .materials-close, .about-reading, .contact-details, .service-details, .boutique-list, .bespoke-workbench) > :is(.section-wrap, .samay-container) {
+  min-width: 0;
+}
+
+.samay-app .featured__stage {
+  width: min(calc(100% - (var(--samay-content-gutter) * 2)), var(--samay-content-max));
+  margin-inline: auto;
+}
+
+.samay-app .featured__stage .product-card__image {
+  aspect-ratio: 1.3 / 1;
+}
+
+.samay-app .site-footer__grid {
+  grid-template-columns: minmax(0, 1.45fr) repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 6vw, 96px);
+}
+
+.samay-app .site-footer__bottom {
+  width: min(calc(100% - (var(--samay-content-gutter) * 2)), var(--samay-content-max));
+}
+
+@media (max-width: 900px) {
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) {
+    min-height: auto;
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > :is([class*="__image"], .image-frame) {
+    min-height: clamp(390px, 68vw, 560px);
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > [class*="__copy"] {
+    padding: clamp(68px, 9vw, 96px) var(--samay-content-gutter) clamp(80px, 10vw, 110px);
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --samay-content-gutter: 20px;
+    --samay-section-space: 84px;
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) {
+    grid-template-columns: 1fr;
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split).editorial-split--reverse > :first-child {
+    order: 0;
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > :is([class*="__image"], .image-frame) {
+    min-height: min(112vw, 460px);
+  }
+
+  .samay-app :is(.home-movement, .boutique-invite, .movement-hero, .movement-detail, .boutique-hero, .atelier-hero, .editorial-split) > [class*="__copy"] {
+    padding: 72px var(--samay-content-gutter) 88px;
+  }
+
+  .samay-app .hero {
+    min-height: 720px;
+  }
+
+  .samay-app .hero__image {
+    object-position: 61% center;
+  }
+
+  .samay-app .featured__stage {
+    width: calc(100% - (var(--samay-content-gutter) * 2));
+  }
+
+  .samay-app .site-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 44px 28px;
+  }
+
+  .samay-app .site-footer__bottom {
+    width: calc(100% - (var(--samay-content-gutter) * 2));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .samay-app .image-frame__img,
+  .samay-app :is(.product-card__image img, .hero__image, .featured__stage img) {
+    transition: none !important;
+  }
+}

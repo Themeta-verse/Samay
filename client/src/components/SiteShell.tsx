@@ -1,7 +1,9 @@
 /* Atelier Obsidian: navigation behaves like a private gallery index—quiet, legible, and always escapable. */
+// Atelier Obsidian structural pass: the shell owns navigation, the global frame, and a composed request pathway.
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowUpRight, Menu, Plus, X } from "lucide-react";
+import { ContentFrame } from "./EditorialPrimitives";
 
 const mark = "/manus-storage/samay-mark_86b9940c.png";
 const navItems = [["Collection", "/collection"], ["Journal", "/journal"], ["The house", "/about"]] as const;
@@ -10,9 +12,9 @@ const discoverItems = [
   ["The movement", "/movement", "A quiet mechanism, examined without spectacle."],
   ["The materials", "/materials", "Steel, sapphire, leather, and the light between them."],
   ["The craft", "/craft", "The gestures that make an object feel inevitable."],
-  ["The atelier", "/atelier", "A fictional contemporary maison, by appointment."],
+  ["The atelier", "/atelier", "A contemporary maison, by appointment."],
   ["Bespoke", "/bespoke", "Select the materials for a private conversation."],
-  ["Boutique", "/boutique", "A physical-world invitation, clearly fictional."],
+  ["Boutique", "/boutique", "A physical-world invitation, by appointment."],
   ["Service", "/service", "Care, continuity, and the time after purchase."],
   ["About SAMAY", "/about", "The philosophy behind the quiet object."],
   ["The journal", "/journal", "Notes on proportion, finishing, and time."],
@@ -29,7 +31,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
       <div className="site-header__inner">
-        <Link href="/" className="brand-lockup" aria-label="SAMAY home"><img src={mark} alt="" className="brand-mark" /><span className="brand-name">SAMAY</span></Link>
+        <Link href="/" className="brand-lockup" aria-label="SAMAY home"><img src={mark} alt="" className="brand-mark" /><span className="brand-name"><span className="brand-name__initial">S</span>AMAY</span></Link>
         <nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href} className={location === href ? "is-active" : ""}>{label}</Link>)}</nav>
         <div className="header-actions">
           <Link href="/boutique" className="header-boutique">Boutique</Link>
@@ -53,7 +55,7 @@ function DiscoverPanel({ onClose }: { onClose: () => void }) {
 }
 
 export function SiteFooter() {
-  return <footer className="site-footer"><div className="site-footer__grid"><div><div className="footer-wordmark">SAMAY</div><p className="footer-caption">Contemporary horology,<br />considered in shadow.</p></div><div className="footer-column"><span className="eyebrow">Explore</span><Link href="/collection">Collection</Link><Link href="/movement">Movement</Link><Link href="/materials">Materials</Link><Link href="/journal">Journal</Link></div><div className="footer-column"><span className="eyebrow">Concierge</span><Link href="/bespoke">Bespoke</Link><Link href="/boutique">Boutique</Link><Link href="/inquiry">Private viewing</Link><Link href="/service">Service</Link></div><div className="footer-column footer-column--last"><span className="eyebrow">The house</span><Link href="/about">About SAMAY</Link><Link href="/atelier">Atelier</Link><Link href="/contact">Contact</Link><a href="mailto:concierge@samay.house">concierge@samay.house</a></div></div><div className="site-footer__bottom"><span>© 2026 SAMAY Watch House</span><span>A fictional contemporary maison</span><span>Private by design</span></div></footer>;
+  return <footer className="site-footer"><ContentFrame className="site-footer__grid"><div><div className="footer-wordmark">SAMAY</div><p className="footer-caption">Contemporary horology,<br />considered in shadow.</p></div><div className="footer-column"><span className="eyebrow">Explore</span><Link href="/collection">Collection</Link><Link href="/movement">Movement</Link><Link href="/materials">Materials</Link><Link href="/journal">Journal</Link></div><div className="footer-column"><span className="eyebrow">Concierge</span><Link href="/bespoke">Bespoke</Link><Link href="/boutique">Boutique</Link><Link href="/inquiry">Private viewing</Link><Link href="/service">Service</Link></div><div className="footer-column footer-column--last"><span className="eyebrow">The house</span><Link href="/about">About SAMAY</Link><Link href="/atelier">Atelier</Link><Link href="/contact">Contact</Link><Link href="/contact">Start a conversation</Link></div></ContentFrame><ContentFrame className="site-footer__bottom"><span>© 2026 SAMAY Watch House</span><span>Contemporary horology, considered in shadow</span><span>Private by design</span></ContentFrame></footer>;
 }
 
 export function SectionLabel({ index, children, dark = false }: { index: string; children: React.ReactNode; dark?: boolean }) { return <div className={`section-label ${dark ? "section-label--dark" : ""}`}><span>{index}</span><span className="section-label__line" /><span>{children}</span></div>; }

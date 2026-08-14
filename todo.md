@@ -38,7 +38,7 @@
 - [x] Add bespoke, boutique, service, about, and contact journeys with clear, trustworthy forms and no fake social proof.
 - [x] Expand the journal with concise, specific editorial pieces and avoid generic AI blog language.
 - [x] Verify desktop/mobile art direction, motion restraint, accessibility, route escape paths, and production build quality across the full ecosystem.
-- [ ] Save a new expanded checkpoint and report practical launch steps.
+- [x] Save a new expanded checkpoint and report practical launch steps.
 
 ## Flagship QA findings
 
@@ -89,3 +89,29 @@
 - [x] Complete the wide-desktop capture before marking the production viewport matrix complete.
 - [x] Wide desktop at 1600px keeps the watch, plinth, hero copy, and house split legible with generous negative space and no accidental empty well.
 - [x] The production viewport matrix is complete across 320, 375, 390, 414, 768, 1024, 1280, 1440, and 1600px captures.
+
+## Level 6 structural refinement — unchecked work
+
+- [x] Establish one global grid with shared max-widths, outer gutters, mobile gutters, columns, spacing tokens, type tokens, colors, radii, and transitions.
+- [x] Audit and normalize hero, editorial, product, macro, architectural, footer, and full-bleed image roles with explicit aspect-ratio and crop rules.
+- [x] Remove accidental image collisions, uncontrolled overflow, arbitrary absolute positioning, and section-boundary ambiguity across every route.
+- [x] Rebuild the hero, material, movement, product, atelier, journal, boutique, bespoke, service, and footer compositions around a small set of reusable editorial split and immersive full-bleed modes.
+- [x] Enforce responsive typography, max-widths, line lengths, safe viewport boundaries, and intentional tablet/mobile recomposition.
+- [x] Refactor repeated layout patterns into reusable premium components while separating brand, content, layout, and data concerns for white-label readiness.
+- [x] Verify accessibility, image dimensions, reserved space, loading priorities, layout shift, and performance after structural changes.
+- [x] Run full visual regression across home, collection, every product, journal, materials, movement, atelier, boutique, bespoke, service, contact, and footer at all required breakpoints.
+- [x] Re-run TypeScript/build/console/network checks and update the existing `samay` repository without creating a new repo or adding secrets.
+- [x] Save the Level 6 checkpoint and deliver the structural-refinement report.
+
+## Trusted style-review amendments
+
+- [x] Remove public-facing prototype and fictional language while preserving truthful no-send and no-payment behavior.
+- [x] Reassert graphite on lighter utility pages through dark appointment cards, material plates, and champagne rules.
+- [x] Make champagne metal more ownable through active indices, hairlines, selected cards, and a restrained wordmark initial.
+
+## Level 6 final visual QA findings
+
+- [x] Desktop regression across home, collection, Meridian, materials, boutique, and contact preserves the shared grid, editorial split modes, full-bleed image roles, and dark/ivory rhythm.
+- [x] Mobile regression at 390px preserves the hero, collection cards, product examination, materials archive, boutique rooms, contact cards, and footer without horizontal overflow.
+- [x] Corrected the brand mark from the duplicated `AAMAY` state to the intended `SAMAY` wordmark treatment.
+- [x] Home journal imagery now renders as campaign photography rather than neutral wells in the full-page capture.

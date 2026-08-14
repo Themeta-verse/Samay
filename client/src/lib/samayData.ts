@@ -1,4 +1,4 @@
-/* Atelier Obsidian: the data layer keeps SAMAY's fictional maison vocabulary specific, tactile, and quietly confident. */
+/* Atelier Obsidian: the data layer keeps SAMAY's maison vocabulary specific, tactile, and quietly confident. */
 
 export type Watch = {
   slug: string;

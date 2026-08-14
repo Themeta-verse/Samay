@@ -2,6 +2,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./flagship.css";
+@import "./structural.css";
 
 :root { --obsidian: #111312; --graphite: #1a1d1b; --graphite-2: #242825; --ivory: #e7e1d7; --paper: #ded8ce; --ash: #a8aaa3; --steel: #6e756f; --champagne: #b79d70; --oxblood: #5b302d; --black: #0b0c0c; --rule-dark: rgba(231,225,215,.17); --rule-light: rgba(17,19,18,.16); --serif: "Cormorant Garamond", Georgia, serif; --sans: "Manrope", Arial, sans-serif; --ease-gallery: cubic-bezier(.77,0,.175,1); --ease-out: cubic-bezier(.23,1,.32,1); }
 
