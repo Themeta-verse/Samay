@@ -175,6 +175,14 @@
 
 ## All-out production pass — optional integrations and verified delivery
 
+## Interactive watch-gallery and motion refinement — active work
+
+- [x] Audit the existing chapter gallery, inspection dialog, product-card hover states, and motion preference rules.
+- [x] Add an accessible interactive watch-chapter gallery with thumbnail selection, keyboard navigation, controlled zoom, and a non-disruptive close path.
+- [x] Add restrained scroll-reveal and model-hover feedback with performant animation properties and reduced-motion fallbacks.
+- [x] Validate desktop/mobile gallery use, keyboard behavior, motion preferences, TypeScript, tests, and production build before publishing.
+- [x] Add focused unit coverage for gallery navigation and bounded pinch-zoom calculations; the full suite now passes 3 files and 9 tests.
+
 - [x] Keep booking and concierge integrations fully optional, server-configured, URL-validated, and hidden when absent; preserve the existing contact route as the truthful fallback.
 - [x] Resolve the full-stack server runtime dependency error, restart the application, and verify a clean boot before treating the integration foundation as complete.
 - [x] Run and record TypeScript, unit-test, production-build, and live-flow checks for the configuration-gated appointment and concierge behavior.
