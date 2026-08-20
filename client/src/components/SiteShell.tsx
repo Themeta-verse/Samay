@@ -1,6 +1,6 @@
 /* Atelier Obsidian: navigation behaves like a private gallery index—quiet, legible, and always escapable. */
 // Atelier Obsidian structural pass: the shell owns navigation, the global frame, and a composed request pathway.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ArrowUpRight, Menu, Plus, X } from "lucide-react";
 import { ContentFrame } from "./EditorialPrimitives";
@@ -25,8 +25,20 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [discoverOpen, setDiscoverOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const discoverButtonRef = useRef<HTMLButtonElement>(null);
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); setMenuOpen(false); setDiscoverOpen(false); }, [location]);
   useEffect(() => { const onScroll = () => setScrolled(window.scrollY > 24); window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll); }, []);
+  useEffect(() => {
+    if (!menuOpen && !discoverOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      if (menuOpen) { setMenuOpen(false); window.setTimeout(() => menuButtonRef.current?.focus(), 0); }
+      if (discoverOpen) { setDiscoverOpen(false); window.setTimeout(() => discoverButtonRef.current?.focus(), 0); }
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [discoverOpen, menuOpen]);
   return <div className="samay-app">
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className={`site-header ${scrolled ? "site-header--scrolled" : ""}`}>
@@ -35,12 +47,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         <nav className="desktop-nav" aria-label="Primary navigation">{navItems.map(([label, href]) => <Link key={href} href={href} className={location === href ? "is-active" : ""}>{label}</Link>)}</nav>
         <div className="header-actions">
           <Link href="/boutique" className="header-boutique">Boutique</Link>
-          <button className={`discover-button ${discoverOpen ? "is-open" : ""}`} onClick={() => setDiscoverOpen((open) => !open)} aria-expanded={discoverOpen} aria-controls="discover-panel">Discover <Plus size={14} strokeWidth={1.1} /></button>
+          <button ref={discoverButtonRef} className={`discover-button ${discoverOpen ? "is-open" : ""}`} onClick={() => setDiscoverOpen((open) => !open)} aria-expanded={discoverOpen} aria-controls="discover-panel" aria-haspopup="dialog">Discover <Plus size={14} strokeWidth={1.1} /></button>
           <Link href="/inquiry" className="inquiry-link">Private viewing <ArrowUpRight size={14} strokeWidth={1.25} /></Link>
-          <button className="menu-button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen}>{menuOpen ? <X size={20} strokeWidth={1.2} /> : <Menu size={20} strokeWidth={1.2} />}</button>
+          <button ref={menuButtonRef} className="menu-button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-menu">{menuOpen ? <X size={20} strokeWidth={1.2} /> : <Menu size={20} strokeWidth={1.2} />}</button>
         </div>
       </div>
-      {menuOpen && <div className="mobile-menu"><div className="mobile-menu__topline"><span>Navigate</span><span>01 — 06</span></div><nav aria-label="Mobile navigation">
+      {menuOpen && <div id="mobile-menu" className="mobile-menu"><div className="mobile-menu__topline"><span>Navigate</span><span>01 — 06</span></div><nav aria-label="Mobile navigation">
         {[...navItems, ["Boutique", "/boutique"], ["Bespoke", "/bespoke"], ["Private viewing", "/inquiry"]].map(([label, href], index) => <Link key={href} href={href} onClick={() => setMenuOpen(false)}><span className="mobile-menu__index">{String(index + 1).padStart(2, "0")}</span>{label}<ArrowUpRight size={17} strokeWidth={1.2} /></Link>)}
       </nav><p className="mobile-menu__note">Contemporary horology, considered in shadow.</p></div>}
     </header>
@@ -51,7 +63,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 }
 
 function DiscoverPanel({ onClose }: { onClose: () => void }) {
-  return <aside id="discover-panel" className="discover-panel" aria-label="Discover SAMAY"><div className="discover-panel__inner"><div className="discover-panel__heading"><span className="eyebrow">SAMAY / Discover</span><button className="discover-panel__close" onClick={onClose} aria-label="Close discover panel"><X size={18} strokeWidth={1.1} /></button></div><div className="discover-panel__grid">{discoverItems.map(([label, href, description], index) => <Link key={href} href={href} onClick={onClose} className="discover-panel__item"><span className="discover-panel__index">{String(index + 1).padStart(2, "0")}</span><span><strong>{label}</strong><small>{description}</small></span><ArrowUpRight size={16} strokeWidth={1.1} /></Link>)}</div><p className="discover-panel__note">Begin anywhere. Stay as long as the object asks.</p></div></aside>;
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => { const timer = window.setTimeout(() => closeButtonRef.current?.focus(), 0); return () => window.clearTimeout(timer); }, []);
+  return <aside id="discover-panel" className="discover-panel" role="dialog" aria-modal="true" aria-label="Discover SAMAY"><div className="discover-panel__inner"><div className="discover-panel__heading"><span className="eyebrow">SAMAY / Discover</span><button ref={closeButtonRef} className="discover-panel__close" onClick={onClose} aria-label="Close discover panel"><X size={18} strokeWidth={1.1} /></button></div><div className="discover-panel__grid">{discoverItems.map(([label, href, description], index) => <Link key={href} href={href} onClick={onClose} className="discover-panel__item"><span className="discover-panel__index">{String(index + 1).padStart(2, "0")}</span><span><strong>{label}</strong><small>{description}</small></span><ArrowUpRight size={16} strokeWidth={1.1} /></Link>)}</div><p className="discover-panel__note">Begin anywhere. Stay as long as the object asks.</p></div></aside>;
 }
 
 export function SiteFooter() {
