@@ -250,3 +250,5 @@
 
 - [x] Fill the unused left-side field in the reported The House composition with an isolated, non-interactive editorial detail that does not alter existing functionality.
 - [x] Verify the refined section at the reported narrow desktop viewport and checkpoint the scoped change. The 917px composition and full-page review passed; TypeScript remains clean.
+- [x] Rework the decorative dial study into a more expressive, responsive horological composition while keeping it entirely non-interactive and isolated from existing functionality.
+- [x] Verify the enhanced creative study at mobile and desktop breakpoints, then checkpoint the scoped change. Full-page checks at 917px and 390px passed, and TypeScript remains clean.
