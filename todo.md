@@ -232,3 +232,7 @@
 ## Production recovery
 
 - [x] Resolve the deployed SAMAY bundle mismatch, verify the live application bootstrap and primary routes, then synchronize and preserve the recovery record.
+
+## Post-restart operational health check
+
+- [x] Inspect backend API services, database connectivity, automated tests, and startup logs after the SAMAY restart. The public tRPC probes responded, `SELECT 1` confirmed database connectivity, and all 13 unit tests passed. The restarted process is healthy; the only startup advisory is the stale `baseline-browser-mapping` data notice.
