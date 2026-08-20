@@ -231,4 +231,4 @@
 
 ## Production recovery
 
-- [ ] Resolve the deployed SAMAY bundle mismatch, verify the live application bootstrap and primary routes, then synchronize and preserve the recovery record.
+- [x] Resolve the deployed SAMAY bundle mismatch, verify the live application bootstrap and primary routes, then synchronize and preserve the recovery record.
