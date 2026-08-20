@@ -244,4 +244,9 @@
 - [x] Make the case, dial, strap, size, and movement selections visibly and honestly update the bespoke preview and the final configuration review.
 - [x] Complete the lower bespoke journey with an editorial configuration summary and no unexplained or dead visual space.
 - [x] Audit and correct responsive, interaction, image-loading, performance, accessibility, and visual-regression issues across the bespoke route and surrounding navigation at desktop and 375px mobile widths.
-- [ ] Add focused configuration-state tests; run full tests, TypeScript, build, responsive/interaction regression checks, then synchronize the verified work to `Themeta-verse/Samay` main without secrets.
+- [x] Add focused configuration-state tests; run full tests, TypeScript, build, responsive/interaction regression checks, then synchronize the verified work to `Themeta-verse/Samay` main without secrets. The 5-file / 15-test suite, TypeScript, build, and desktop/375px captures passed; GitHub `main` matched commit `c26a059` before the temporary repository key was revoked and removed.
+
+## The house editorial composition refinement
+
+- [x] Fill the unused left-side field in the reported The House composition with an isolated, non-interactive editorial detail that does not alter existing functionality.
+- [x] Verify the refined section at the reported narrow desktop viewport and checkpoint the scoped change. The 917px composition and full-page review passed; TypeScript remains clean.

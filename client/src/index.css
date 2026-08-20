@@ -105,6 +105,20 @@ h3 { font-size: 2rem; letter-spacing: -.025em; }
 .manifesto { padding: 125px 9vw 29px; }
 .manifesto .section-label { margin-bottom: 92px; }
 .manifesto__grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 12vw; align-items: end; }
+.manifesto__statement { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; min-height: 500px; }
+.manifesto__dial-study { position: relative; width: clamp(168px, 17vw, 245px); aspect-ratio: 1; border: 1px solid rgba(183,157,112,.36); border-radius: 50%; color: var(--champagne); opacity: .86; }
+.manifesto__dial-study::before, .manifesto__dial-study::after { position: absolute; inset: 12%; border: 1px solid rgba(231,225,215,.12); border-radius: inherit; content: ""; }
+.manifesto__dial-study::after { inset: 31%; border-color: rgba(183,157,112,.42); }
+.manifesto__dial-mark { position: absolute; width: 1px; height: 12%; background: rgba(231,225,215,.42); transform-origin: 50% 100%; }
+.manifesto__dial-mark--north { top: 7%; left: calc(50% - .5px); }
+.manifesto__dial-mark--east { top: calc(50% - 6%); right: 7%; transform: rotate(90deg); }
+.manifesto__dial-mark--south { bottom: 7%; left: calc(50% - .5px); transform: rotate(180deg); }
+.manifesto__dial-mark--west { top: calc(50% - 6%); left: 7%; transform: rotate(270deg); }
+.manifesto__dial-hand { position: absolute; bottom: 50%; left: calc(50% - .5px); width: 1px; background: var(--champagne); transform-origin: bottom; }
+.manifesto__dial-hand--hour { height: 24%; transform: rotate(-44deg); }
+.manifesto__dial-hand--minute { height: 34%; background: rgba(231,225,215,.7); transform: rotate(118deg); }
+.manifesto__dial-hub { position: absolute; top: calc(50% - 3px); left: calc(50% - 3px); width: 6px; height: 6px; border-radius: 50%; background: var(--champagne); }
+.manifesto__dial-caption { position: absolute; top: 50%; left: calc(100% + 18px); width: 85px; color: var(--ash); font-size: 8px; letter-spacing: .14em; line-height: 1.55; text-transform: uppercase; }
 .manifesto h2 { margin-bottom: 0; color: var(--ivory); }
 .manifesto__copy { max-width: 420px; color: rgba(231,225,215,.69); }
 .manifesto__copy .lead-copy { margin-bottom: 31px; color: var(--ivory); }
