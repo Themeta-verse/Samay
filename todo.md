@@ -228,3 +228,7 @@
 - [x] Audit and fix resolvable performance, loading, layout-shift, accessibility, security, client-server boundary, and future-configuration readiness issues without adding invented integrations or credentials.
 - [x] Validate the entire route set at the required mobile, tablet, desktop, and wide-screen sizes; verify keyboard, forms, diagnostics, tests, TypeScript, build, clean tree, and no-secret conditions.
 - [x] Commit, synchronize, publish, and verify the autonomous final production pass on the existing `Themeta-verse/Samay` `main` branch.
+
+## Production recovery
+
+- [ ] Resolve the deployed SAMAY bundle mismatch, verify the live application bootstrap and primary routes, then synchronize and preserve the recovery record.
