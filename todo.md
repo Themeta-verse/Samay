@@ -252,3 +252,11 @@
 - [x] Verify the refined section at the reported narrow desktop viewport and checkpoint the scoped change. The 917px composition and full-page review passed; TypeScript remains clean.
 - [x] Rework the decorative dial study into a more expressive, responsive horological composition while keeping it entirely non-interactive and isolated from existing functionality.
 - [x] Verify the enhanced creative study at mobile and desktop breakpoints, then checkpoint the scoped change. Full-page checks at 917px and 390px passed, and TypeScript remains clean.
+
+## Theme, authentication, and living horology study
+
+- [x] Audit and reuse SAMAY’s existing project-native authentication and theme architecture before adding new entry points or state.
+- [x] Add an accessible, persisted theme preference that leaves the Atelier Obsidian default untouched unless the user explicitly changes it.
+- [x] Add a safe authentication entry/account-status treatment using the existing project-native OAuth mechanism without inventing credentials or exposing secrets.
+- [x] Animate the home horology study’s layered rings with subtle reduced-motion-safe rotation; make numerical markers hover-responsive; and add an accessible atelier-metadata tooltip.
+- [x] Run TypeScript, tests, build, responsive and keyboard interaction checks, then checkpoint and synchronize the verified work without secrets. Five test files / 15 tests, TypeScript, the production build, and desktop/mobile visual checks passed; reduced motion and tooltip keyboard affordances are native to the implementation.

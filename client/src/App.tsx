@@ -51,7 +51,7 @@ function Router() {
 }
 
 function App() {
-  return <ErrorBoundary><ThemeProvider defaultTheme="dark"><TooltipProvider><Toaster /><SiteShell><Suspense fallback={<RouteLoading />}><Router /></Suspense></SiteShell></TooltipProvider></ThemeProvider></ErrorBoundary>;
+  return <ErrorBoundary><ThemeProvider defaultTheme="dark" switchable><TooltipProvider><Toaster /><SiteShell><Suspense fallback={<RouteLoading />}><Router /></Suspense></SiteShell></TooltipProvider></ThemeProvider></ErrorBoundary>;
 }
 
 export default App;

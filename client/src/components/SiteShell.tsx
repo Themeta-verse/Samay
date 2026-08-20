@@ -2,8 +2,11 @@
 // Atelier Obsidian structural pass: the shell owns navigation, the global frame, and a composed request pathway.
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "wouter";
-import { ArrowUpRight, Menu, Plus, X } from "lucide-react";
+import { ArrowUpRight, LogIn, LogOut, Menu, Moon, Plus, Sun, UserRound, X } from "lucide-react";
 import { ContentFrame } from "./EditorialPrimitives";
+import { useTheme } from "@/contexts/ThemeContext";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { startLogin } from "@/const";
 
 const mark = "/manus-storage/samay-mark_86b9940c.png";
 const navItems = [["Collection", "/collection"], ["Journal", "/journal"], ["The house", "/about"]] as const;
@@ -27,6 +30,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const discoverButtonRef = useRef<HTMLButtonElement>(null);
+  const { theme, toggleTheme } = useTheme();
+  const { user, loading, isAuthenticated, logout } = useAuth();
   useEffect(() => { window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }); setMenuOpen(false); setDiscoverOpen(false); }, [location]);
   useEffect(() => { const onScroll = () => setScrolled(window.scrollY > 24); window.addEventListener("scroll", onScroll, { passive: true }); return () => window.removeEventListener("scroll", onScroll); }, []);
   useEffect(() => {
@@ -49,6 +54,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Link href="/boutique" className="header-boutique">Boutique</Link>
           <button ref={discoverButtonRef} className={`discover-button ${discoverOpen ? "is-open" : ""}`} onClick={() => setDiscoverOpen((open) => !open)} aria-expanded={discoverOpen} aria-controls="discover-panel" aria-haspopup="dialog">Discover <Plus size={14} strokeWidth={1.1} /></button>
           <Link href="/inquiry" className="inquiry-link">Private viewing <ArrowUpRight size={14} strokeWidth={1.25} /></Link>
+          <button className="shell-utility" type="button" onClick={toggleTheme} aria-label={theme === "dark" ? "Switch to gallery light theme" : "Switch to obsidian theme"} title={theme === "dark" ? "Gallery light" : "Obsidian theme"}>{theme === "dark" ? <Sun size={14} strokeWidth={1.35} /> : <Moon size={14} strokeWidth={1.35} />}</button>
+          {loading ? <span className="shell-utility shell-utility--loading" aria-label="Checking account">•••</span> : isAuthenticated ? <button className="shell-account" type="button" onClick={() => logout()} aria-label={`Sign out ${user?.name ?? "of your account"}`}><UserRound size={13} strokeWidth={1.25} /><span>{user?.name?.split(" ")[0] ?? "Account"}</span><LogOut size={12} strokeWidth={1.25} /></button> : <button className="shell-account" type="button" onClick={startLogin}><LogIn size={13} strokeWidth={1.25} /><span>Sign in</span></button>}
           <button ref={menuButtonRef} className="menu-button" onClick={() => setMenuOpen((open) => !open)} aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="mobile-menu">{menuOpen ? <X size={20} strokeWidth={1.2} /> : <Menu size={20} strokeWidth={1.2} />}</button>
         </div>
       </div>
