@@ -169,13 +169,10 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (!id.includes("node_modules")) return;
-          if (id.includes("/react/") || id.includes("/react-dom/") || id.includes("/scheduler/")) return "react-runtime";
-          if (id.includes("@trpc") || id.includes("@tanstack") || id.includes("superjson")) return "data-runtime";
-          if (id.includes("@radix-ui") || id.includes("lucide-react") || id.includes("sonner")) return "interface-runtime";
-          return "vendor-runtime";
-        },
+        // The production domain can retain an older HTML document while a new
+        // deployment is rolling out. A single hashed application bundle avoids
+        // cross-version imports between independently cached manual chunks.
+        inlineDynamicImports: true,
       },
     },
   },
