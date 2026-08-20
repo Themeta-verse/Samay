@@ -220,4 +220,4 @@
 - [x] Audit global layout, typography, navigation, imagery, motion, accessibility, and desktop/mobile responsiveness for production-quality gaps.
 - [x] Refine identified production gaps across the editorial, product, house, boutique, private-viewing, and contact experiences without inventing integrations or assets.
 - [x] Validate interaction paths, visual regressions, tests, TypeScript, production build, and runtime logs across the required device range.
-- [ ] Commit, synchronize, publish, and document the verified production finishing pass.
+- [x] Commit, synchronize, publish, and document the verified production finishing pass.
