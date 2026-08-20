@@ -221,3 +221,10 @@
 - [x] Refine identified production gaps across the editorial, product, house, boutique, private-viewing, and contact experiences without inventing integrations or assets.
 - [x] Validate interaction paths, visual regressions, tests, TypeScript, production build, and runtime logs across the required device range.
 - [x] Commit, synchronize, publish, and document the verified production finishing pass.
+
+## Autonomous final production pass
+
+- [x] Audit and fix every resolvable visual, grid, spacing, typography, crop, overlap, responsive, navigation, CTA, and interaction issue across SAMAY’s public routes.
+- [x] Audit and fix resolvable performance, loading, layout-shift, accessibility, security, client-server boundary, and future-configuration readiness issues without adding invented integrations or credentials.
+- [x] Validate the entire route set at the required mobile, tablet, desktop, and wide-screen sizes; verify keyboard, forms, diagnostics, tests, TypeScript, build, clean tree, and no-secret conditions.
+- [ ] Commit, synchronize, publish, and verify the autonomous final production pass on the existing `Themeta-verse/Samay` `main` branch.
