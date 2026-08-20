@@ -7,6 +7,7 @@ import { ContentFrame } from "./EditorialPrimitives";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useAuth } from "@/_core/hooks/useAuth";
 import { startLogin } from "@/const";
+import { formatVisitorTime } from "@/lib/samayClock";
 
 const mark = "/manus-storage/samay-mark_86b9940c.png";
 const navItems = [["Collection", "/collection"], ["Journal", "/journal"], ["The house", "/about"]] as const;
@@ -76,7 +77,14 @@ function DiscoverPanel({ onClose }: { onClose: () => void }) {
 }
 
 export function SiteFooter() {
-  return <footer className="site-footer"><ContentFrame className="site-footer__grid"><div><div className="footer-wordmark"><img src={mark} alt="" className="brand-mark brand-mark--footer" /><span>S<span className="brand-name__aperture">A</span>MAY</span></div><p className="footer-caption">Contemporary horology,<br />considered in shadow.</p></div><div className="footer-column"><span className="eyebrow">Explore</span><Link href="/collection">Collection</Link><Link href="/movement">Movement</Link><Link href="/materials">Materials</Link><Link href="/journal">Journal</Link></div><div className="footer-column"><span className="eyebrow">Concierge</span><Link href="/bespoke">Bespoke</Link><Link href="/boutique">Boutique</Link><Link href="/inquiry">Private viewing</Link><Link href="/service">Service</Link></div><div className="footer-column footer-column--last"><span className="eyebrow">The house</span><Link href="/about">About SAMAY</Link><Link href="/atelier">Atelier</Link><Link href="/contact">Contact</Link><Link href="/contact">Start a conversation</Link></div></ContentFrame><ContentFrame className="site-footer__bottom"><span>© 2026 SAMAY Watch House</span><span>Contemporary horology, considered in shadow</span><span>Private by design</span></ContentFrame></footer>;
+  const [visitorTime, setVisitorTime] = useState(() => new Date());
+  useEffect(() => {
+    const tick = () => setVisitorTime(new Date());
+    tick();
+    const interval = window.setInterval(tick, 1000);
+    return () => window.clearInterval(interval);
+  }, []);
+  return <footer className="site-footer"><ContentFrame className="site-footer__grid"><div><div className="footer-wordmark"><img src={mark} alt="" className="brand-mark brand-mark--footer" /><span>S<span className="brand-name__aperture">A</span>MAY</span></div><p className="footer-caption">Contemporary horology,<br />considered in shadow.</p></div><div className="footer-column"><span className="eyebrow">Explore</span><Link href="/collection">Collection</Link><Link href="/movement">Movement</Link><Link href="/materials">Materials</Link><Link href="/journal">Journal</Link></div><div className="footer-column"><span className="eyebrow">Concierge</span><Link href="/bespoke">Bespoke</Link><Link href="/boutique">Boutique</Link><Link href="/inquiry">Private viewing</Link><Link href="/service">Service</Link></div><div className="footer-column footer-column--last"><span className="eyebrow">The house</span><Link href="/about">About SAMAY</Link><Link href="/atelier">Atelier</Link><Link href="/contact">Contact</Link><Link href="/contact">Start a conversation</Link></div></ContentFrame><ContentFrame className="site-footer__bottom"><span>© 2026 SAMAY Watch House</span><span>Contemporary horology, considered in shadow</span><time className="visitor-clock" dateTime={visitorTime.toISOString()} aria-label={`Your local time ${formatVisitorTime(visitorTime)}`}>Local time {formatVisitorTime(visitorTime)}</time><span>Private by design</span></ContentFrame></footer>;
 }
 
 export function SectionLabel({ index, children, dark = false }: { index: string; children: React.ReactNode; dark?: boolean }) { return <div className={`section-label ${dark ? "section-label--dark" : ""}`}><span>{index}</span><span className="section-label__line" /><span>{children}</span></div>; }

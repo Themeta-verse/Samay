@@ -260,3 +260,9 @@
 - [x] Add a safe authentication entry/account-status treatment using the existing project-native OAuth mechanism without inventing credentials or exposing secrets.
 - [x] Animate the home horology study’s layered rings with subtle reduced-motion-safe rotation; make numerical markers hover-responsive; and add an accessible atelier-metadata tooltip.
 - [x] Run TypeScript, tests, build, responsive and keyboard interaction checks, then checkpoint and synchronize the verified work without secrets. Five test files / 15 tests, TypeScript, the production build, and desktop/mobile visual checks passed; reduced motion and tooltip keyboard affordances are native to the implementation.
+
+## Visitor-local real-time display
+
+- [x] Audit existing header and navigation time-related treatments before adding a real-time display.
+- [x] Add an accessible visitor-local clock that initializes on site open, updates accurately, and safely cleans up its timer without affecting existing functionality.
+- [x] Verify the clock at desktop and mobile widths alongside TypeScript, tests, and production build; then checkpoint and synchronize the verified implementation. Six test files / 16 tests, TypeScript, the production build, and 1280px/390px full-page checks passed.

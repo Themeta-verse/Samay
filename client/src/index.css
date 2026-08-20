@@ -438,6 +438,7 @@ html:not(.dark) .hero, html:not(.dark) .section-dark, html:not(.dark) .site-foot
 .footer-column a:hover { color: var(--ivory); }
 .footer-column--last { color: #858a81; }
 .site-footer__bottom { display: flex; justify-content: space-between; gap: 20px; max-width: 1420px; border-top: 1px solid var(--rule-dark); margin: 93px auto 0; padding-top: 18px; color: #686e66; font-size: 9px; letter-spacing: .13em; text-transform: uppercase; }
+.visitor-clock { color: var(--champagne); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
 @media (max-width: 900px) {
   .section-wrap { width: min(100% - 48px, 720px); }
