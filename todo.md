@@ -212,3 +212,4 @@
 - [x] Add accessible click-to-copy email feedback, direct telephone dialing, and clearly labelled LinkedIn/X social-profile placeholders beside the public contact details.
 - [x] Add focused tests and responsive visual validation for the new contact interactions, then publish the verified update.
 - [x] Reassess remaining SAMAY activation tasks for safe, owner-independent improvements and document the exact approved inputs required where activation must remain blocked.
+- [ ] Await approved visit duration, operating hours, timezone, venue, notice period, and cancellation policy before creating or linking any public SAMAY appointment schedule.
