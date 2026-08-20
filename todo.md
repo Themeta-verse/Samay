@@ -236,3 +236,12 @@
 ## Post-restart operational health check
 
 - [x] Inspect backend API services, database connectivity, automated tests, and startup logs after the SAMAY restart. The public tRPC probes responded, `SELECT 1` confirmed database connectivity, and all 13 unit tests passed. The restarted process is healthy; the only startup advisory is the stale `baseline-browser-mapping` data notice.
+
+## Bespoke experience, responsive, and interaction repair
+
+- [x] Audit the existing `/bespoke` route, configuration state, preview behavior, persistence, and integration boundaries before modifying the experience.
+- [x] Build one reliable, accessible configuration source of truth with session-safe persistence, deterministic configuration IDs, working save/reset actions, and truthful consultation handoff.
+- [x] Make the case, dial, strap, size, and movement selections visibly and honestly update the bespoke preview and the final configuration review.
+- [x] Complete the lower bespoke journey with an editorial configuration summary and no unexplained or dead visual space.
+- [x] Audit and correct responsive, interaction, image-loading, performance, accessibility, and visual-regression issues across the bespoke route and surrounding navigation at desktop and 375px mobile widths.
+- [ ] Add focused configuration-state tests; run full tests, TypeScript, build, responsive/interaction regression checks, then synchronize the verified work to `Themeta-verse/Samay` main without secrets.

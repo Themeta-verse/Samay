@@ -1,0 +1,6 @@
+export type BespokeConfiguration={watch:string;caseMaterial:"steel"|"titanium"|"gold";dial:"ivory"|"slate"|"charcoal";strap:"leather"|"steel"|"rubber";size:"compact"|"standard"|"presence";movement:"hand-wound"|"automatic"|"manual-reserve"};
+export const bespokeStorageKey="samay.bespoke.configuration.v1";
+export const defaultBespokeConfiguration:BespokeConfiguration={watch:"meridian",caseMaterial:"steel",dial:"ivory",strap:"leather",size:"standard",movement:"hand-wound"};
+const valid={caseMaterial:["steel","titanium","gold"],dial:["ivory","slate","charcoal"],strap:["leather","steel","rubber"],size:["compact","standard","presence"],movement:["hand-wound","automatic","manual-reserve"]} as const;
+export function restoreBespokeConfiguration(raw:string|null):BespokeConfiguration{try{const c=JSON.parse(raw??"");if(c&&typeof c.watch==="string"&&Object.entries(valid).every(([k,v])=>(v as readonly string[]).includes(c[k])))return c;}catch{}return defaultBespokeConfiguration;}
+export function configurationId(c:BespokeConfiguration){let h=2166136261;for(const x of JSON.stringify(c))h=Math.imul(h^x.charCodeAt(0),16777619);return `SM-${[c.watch,c.caseMaterial,c.dial,c.strap,c.size,c.movement].map(x=>x.replace(/[^a-z]/g,"").slice(0,3).toUpperCase()).join("-")}-${(h>>>0).toString(36).toUpperCase().slice(0,5)}`;}

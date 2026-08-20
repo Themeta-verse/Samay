@@ -1,98 +1,46 @@
-/* Atelier Obsidian: bespoke is a tactile selection conversation, never a dashboard and never a false transaction. */
-import { FormEvent, useState } from "react";
-import { ArrowUpRight, Check } from "lucide-react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { ArrowUpRight, Check, RotateCcw, Save } from "lucide-react";
 import { Link } from "wouter";
 import { ArrowLink, SectionLabel } from "@/components/SiteShell";
 import { watches } from "@/lib/samayData";
+import { BespokeConfiguration, bespokeStorageKey, configurationId, defaultBespokeConfiguration, restoreBespokeConfiguration } from "@/lib/bespokeConfiguration";
 import { trpc } from "@/lib/trpc";
+import "@/bespokeExperience.css";
 
-type DeliveryState = "sent" | "owner_notified" | "not_configured";
-
-const caseOptions = [["steel", "Brushed steel", "The house standard"], ["titanium", "Bead-blasted titanium", "Weight, removed"], ["gold", "Champagne gold", "A measured accent"]] as const;
-const dialOptions = [["ivory", "Warm ivory"], ["slate", "Slate grey"], ["charcoal", "Charcoal"]] as const;
-const strapOptions = [["leather", "Calfskin"], ["steel", "Articulated steel"], ["rubber", "Textured rubber"]] as const;
+const options = {
+  caseMaterial: [["steel", "Brushed steel", "House standard"], ["titanium", "Bead-blasted titanium", "Weight reduced"], ["gold", "Champagne gold", "Measured accent"]],
+  dial: [["ivory", "Warm ivory"], ["slate", "Slate grey"], ["charcoal", "Charcoal"]],
+  strap: [["leather", "Calfskin"], ["steel", "Articulated steel"], ["rubber", "Textured rubber"]],
+  size: [["compact", "Compact", "38 mm study"], ["standard", "Standard", "40 mm study"], ["presence", "Presence", "42 mm study"]],
+  movement: [["hand-wound", "Hand-wound", "Direct ritual"], ["automatic", "Automatic", "Daily rhythm"], ["manual-reserve", "Manual reserve", "Longer interval"]],
+} as const;
+type OptionGroup = keyof typeof options;
+const label = (group: OptionGroup, value: string) => options[group].find(item => item[0] === value)?.[1] ?? value;
 
 export default function Bespoke() {
-  const [watch, setWatch] = useState(watches[0].slug);
-  const [caseChoice, setCaseChoice] = useState("steel");
-  const [dialChoice, setDialChoice] = useState("ivory");
-  const [strapChoice, setStrapChoice] = useState("leather");
+  const [configuration, setConfiguration] = useState<BespokeConfiguration>(() => typeof window === "undefined" ? defaultBespokeConfiguration : restoreBespokeConfiguration(sessionStorage.getItem(bespokeStorageKey)));
+  const [saved, setSaved] = useState(false);
   const [requested, setRequested] = useState(false);
   const [error, setError] = useState("");
-  const [delivery, setDelivery] = useState<DeliveryState>("not_configured");
-  const selected = watches.find((item) => item.slug === watch) ?? watches[0];
-  const { data: appointment } = trpc.appointment.availability.useQuery();
-  const requestMutation = trpc.concierge.submit.useMutation({
-    onSuccess: (result) => { setDelivery(result.delivery === "failed" ? "not_configured" : result.delivery); setRequested(true); },
-    onError: () => setError("The concierge channel could not prepare this request. Please try again later."),
-  });
+  const selected = watches.find(item => item.slug === configuration.watch) ?? watches[0];
+  const configurationReference = useMemo(() => configurationId(configuration), [configuration]);
+  const appointment = trpc.appointment.availability.useQuery().data;
+  const requestMutation = trpc.concierge.submit.useMutation({ onSuccess: () => setRequested(true), onError: () => setError("The concierge channel could not prepare this request. Please try again later.") });
 
+  useEffect(() => { sessionStorage.setItem(bespokeStorageKey, JSON.stringify(configuration)); setSaved(false); }, [configuration]);
+  const choose = <K extends keyof BespokeConfiguration>(key: K, value: BespokeConfiguration[K]) => setConfiguration(current => ({ ...current, [key]: value }));
+  const reset = () => { sessionStorage.removeItem(bespokeStorageKey); setConfiguration(defaultBespokeConfiguration); setSaved(false); };
   const submit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") ?? "").trim();
-    const email = String(form.get("email") ?? "").trim();
-    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setError("Please include your name and a valid email address.");
-      return;
-    }
-    setError("");
-    requestMutation.mutate({
-      kind: "bespoke_selection",
-      name,
-      email,
-      reference: selected.name,
-      message: String(form.get("occasion") ?? "").trim() || undefined,
-      selection: {
-        case: caseChoice,
-        dial: dialChoice,
-        strap: strapChoice,
-        occasion: String(form.get("occasion") ?? "").trim() || undefined,
-      },
-    });
+    event.preventDefault(); const form = new FormData(event.currentTarget); const name = String(form.get("name") ?? "").trim(); const email = String(form.get("email") ?? "").trim();
+    if (!name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Please include your name and a valid email address."); return; }
+    setError(""); requestMutation.mutate({ kind: "bespoke_selection", name, email, reference: `${selected.name} / ${configurationReference}`, message: String(form.get("occasion") ?? "").trim() || undefined, selection: { case: label("caseMaterial", configuration.caseMaterial), dial: label("dial", configuration.dial), strap: label("strap", configuration.strap), occasion: String(form.get("occasion") ?? "").trim() || undefined } });
   };
+  const Choice = ({ group, title }: { group: OptionGroup; title: string }) => <fieldset id={group}><legend>{title}</legend><div className={group === "caseMaterial" ? "option-list" : "bespoke-select-grid"}>{options[group].map(([value, name, note]) => <button type="button" key={value} className={configuration[group] === value ? "is-active" : ""} onClick={() => choose(group, value as never)} aria-pressed={configuration[group] === value}><strong>{name}</strong>{note && <small>{note}</small>}</button>)}</div></fieldset>;
+  const review: [string, string][] = [["Reference", selected.name], ["Case", label("caseMaterial", configuration.caseMaterial)], ["Dial", label("dial", configuration.dial)], ["Strap / bracelet", label("strap", configuration.strap)], ["Proportion", label("size", configuration.size)], ["Movement preference", label("movement", configuration.movement)]];
 
-  const isReviewed = delivery === "sent" || delivery === "owner_notified";
-
-  return (
-    <div className="flagship-page bespoke-page">
-      <section className="bespoke-hero section-dark">
-        <div className="section-wrap">
-          <SectionLabel index="01" dark>Private selection</SectionLabel>
-          <div className="bespoke-hero__grid">
-            <div><h1>Make it<br /><em>your hours.</em></h1><p>A quiet configuration conversation for the watch, material, and occasion that stay with you.</p></div>
-            <div className={`bespoke-preview bespoke-preview--${caseChoice}-${dialChoice}-${strapChoice}`}><img src={selected.image} alt={`${selected.name} preview`} /><span>Preview / {selected.reference}</span></div>
-          </div>
-        </div>
-      </section>
-      <section className="bespoke-workbench section-paper">
-        <div className="section-wrap">
-          <SectionLabel index="02">Frame the conversation</SectionLabel>
-          <div className="bespoke-workbench__grid">
-            <div className="bespoke-controls">
-              <label className="select-label">Reference<select value={watch} onChange={(event) => setWatch(event.target.value)}>{watches.map((item) => <option key={item.slug} value={item.slug}>{item.name} / {item.family}</option>)}</select></label>
-              <p className="bespoke-controls__notice">These material choices are conversation prompts, not a live catalogue of available configurations. The house confirms any possibility after review.</p>
-              <fieldset><legend>Case preference</legend><div className="option-list">{caseOptions.map(([value, label, note]) => <button type="button" key={value} className={caseChoice === value ? "is-active" : ""} onClick={() => setCaseChoice(value)} aria-pressed={caseChoice === value}><span className={`option-swatch option-swatch--${value}`} /><span><strong>{label}</strong><small>{note}</small></span><ArrowUpRight size={15} strokeWidth={1.1} /></button>)}</div></fieldset>
-              <fieldset><legend>Dial preference</legend><div className="chip-list">{dialOptions.map(([value, label]) => <button type="button" key={value} className={dialChoice === value ? "is-active" : ""} onClick={() => setDialChoice(value)} aria-pressed={dialChoice === value}>{label}</button>)}</div></fieldset>
-              <fieldset><legend>Strap / bracelet preference</legend><div className="chip-list">{strapOptions.map(([value, label]) => <button type="button" key={value} className={strapChoice === value ? "is-active" : ""} onClick={() => setStrapChoice(value)} aria-pressed={strapChoice === value}>{label}</button>)}</div></fieldset>
-            </div>
-            <div className="bespoke-summary">
-              <span className="eyebrow">Your conversation notes</span>
-              <h2>{selected.name}<br /><em>{selected.short}</em></h2>
-              <div className="bespoke-summary__line"><span>Case preference</span><strong>{caseOptions.find(([value]) => value === caseChoice)?.[1]}</strong></div>
-              <div className="bespoke-summary__line"><span>Dial preference</span><strong>{dialOptions.find(([value]) => value === dialChoice)?.[1]}</strong></div>
-              <div className="bespoke-summary__line"><span>Strap preference</span><strong>{strapOptions.find(([value]) => value === strapChoice)?.[1]}</strong></div>
-              <p>These notes prepare a private conversation. No payment is taken, no configuration is reserved, and no order is implied.</p>
-              <ArrowLink href={`/watch/${selected.slug}`}>Examine the photographed reference</ArrowLink>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="bespoke-request section-dark">
-        <div className="section-wrap">
-          {requested ? <div className="request-confirmation" aria-live="polite"><div className="request-confirmation__mark"><Check size={22} strokeWidth={1.1} /></div><span className="eyebrow">{isReviewed ? "Conversation forwarded for review" : "Conversation prepared"}</span><h2>A starting point<br /><em>for review.</em></h2><p>{isReviewed ? `Your ${selected.name} preference notes have been forwarded to the SAMAY concierge for review. No appointment, configuration, or order is confirmed until the house replies.` : `Your ${selected.name} preference notes were checked and prepared in this browser. They were not sent, stored, or shared because a secure concierge review channel is not currently available.`}</p>{appointment?.isActive && appointment.bookingPageUrl ? <a className="button-primary request-confirmation__appointment" href={appointment.bookingPageUrl} target="_blank" rel="noreferrer">Choose a viewing time <ArrowUpRight size={15} strokeWidth={1.2} /></a> : null}{delivery === "not_configured" ? <Link href="/contact" className="arrow-link arrow-link--dark"><span>Contact the house</span><ArrowUpRight size={15} strokeWidth={1.2} /></Link> : null}<Link href="/inquiry" className="arrow-link arrow-link--dark"><span>Continue to private viewing</span><ArrowUpRight size={15} strokeWidth={1.2} /></Link></div> : <form className="bespoke-request__grid" onSubmit={submit} noValidate><div><SectionLabel index="03" dark>Continue by conversation</SectionLabel><h2>A private<br /><em>starting point.</em></h2><p>Share your preference and the occasion around it. Your notes remain visible here while you prepare the conversation.</p></div><div className="bespoke-request__form"><label><span>Name</span><input name="name" placeholder="Your name" autoComplete="name" /></label><label><span>Email</span><input type="email" name="email" placeholder="Your email address" autoComplete="email" /></label><label><span>Occasion</span><input name="occasion" placeholder="A birthday, a new chapter, simply because" /></label><aside className="form-handoff form-handoff--dark"><span>Appointment availability</span><p>{appointment?.isActive ? "The Google Calendar private-viewing schedule is available after your request is forwarded." : "Viewing times are arranged by the house until a Google Calendar schedule is published."}</p></aside><aside className="form-handoff form-handoff--dark"><span>Concierge review</span><p>Your preference notes are validated and forwarded to the SAMAY concierge through the house’s secure internal channel. An appointment and any final configuration remain subject to review.</p></aside>{error && <p className="form-error form-error--dark" role="alert">{error}</p>}<button type="submit" className="button-primary" disabled={requestMutation.isPending}>{requestMutation.isPending ? "Forwarding consultation" : "Request a consultation"} <ArrowUpRight size={15} strokeWidth={1.1} /></button></div></form>}
-        </div>
-      </section>
-    </div>
-  );
+  return <div className="flagship-page bespoke-page bespoke-page--complete" data-case={configuration.caseMaterial} data-dial={configuration.dial} data-strap={configuration.strap}>
+    <section className="bespoke-hero section-dark"><div className="section-wrap"><SectionLabel index="01" dark>Private selection</SectionLabel><div className="bespoke-hero__grid"><div><h1>Make it<br /><em>your hours.</em></h1><p>A private configuration study, held consistently in the object, review, and consultation notes.</p></div><div className="bespoke-preview bespoke-preview--responsive"><img src={selected.image} alt={`${selected.name} material study: ${label("caseMaterial", configuration.caseMaterial)}, ${label("dial", configuration.dial)}, and ${label("strap", configuration.strap)}`} /><div className="bespoke-preview__state"><span>Visual material study</span><strong>{label("caseMaterial", configuration.caseMaterial)} / {label("dial", configuration.dial)} / {label("strap", configuration.strap)}</strong></div></div></div></div></section>
+    <main className="bespoke-flow section-paper"><div className="section-wrap"><nav className="bespoke-flow__rail" aria-label="Bespoke configuration steps"><a href="#caseMaterial">01 Case</a><a href="#dial">02 Dial</a><a href="#strap">03 Strap</a><a href="#movement">04 Movement</a><a href="#review">05 Review</a></nav><section className="bespoke-workbench"><SectionLabel index="02">Frame the object</SectionLabel><div className="bespoke-workbench__grid"><div className="bespoke-controls"><label className="select-label">Reference<select value={configuration.watch} onChange={event => choose("watch", event.target.value)}>{watches.map(item => <option key={item.slug} value={item.slug}>{item.name} / {item.family}</option>)}</select></label><p className="bespoke-controls__notice">The preview is an illustrative material study applied to the photographed reference, not evidence of an available production variant. The house confirms feasibility after review.</p><Choice group="caseMaterial" title="01 — Case" /><Choice group="dial" title="02 — Dial" /><Choice group="strap" title="03 — Strap" /><Choice group="size" title="Proportion preference" /><Choice group="movement" title="04 — Movement" /></div><aside className="bespoke-summary"><span className="eyebrow">Current configuration</span><h2>{selected.name}<br /><em>{selected.short}</em></h2>{review.slice(0, 3).map(([key, value]) => <div className="bespoke-summary__line" key={key}><span>{key}</span><strong>{value}</strong></div>)}<p>Every choice updates this study immediately and is kept in this browser for review.</p><ArrowLink href={`/watch/${selected.slug}`}>Examine the photographed reference</ArrowLink></aside></div></section><section className="bespoke-review" id="review"><div><SectionLabel index="05">Your configuration</SectionLabel><h2>Resolved<br /><em>for conversation.</em></h2><p>A precise session record for a private discussion, not a reservation, order, or catalogue confirmation.</p></div><div><div className="bespoke-review__ledger">{review.map(([key, value]) => <div key={key}><span>{key}</span><strong>{value}</strong></div>)}</div><div className="bespoke-review__id">{configurationReference}</div><p>Stored only in this browser until you reset it or end the session.</p><div className="bespoke-review__actions"><button type="button" onClick={() => { sessionStorage.setItem(bespokeStorageKey, JSON.stringify(configuration)); setSaved(true); }}><Save size={14} /> Save configuration</button><button type="button" onClick={reset}><RotateCcw size={14} /> Reset configuration</button><a className="button-primary" href="#consultation">Request bespoke consultation <ArrowUpRight size={14} /></a></div>{saved && <p className="bespoke-saved" role="status">Configuration saved in this browser.</p>}</div></section></div></main>
+    <section className="bespoke-request section-dark" id="consultation"><div className="section-wrap">{requested ? <div className="request-confirmation" aria-live="polite"><div className="request-confirmation__mark"><Check size={22} /></div><span className="eyebrow">Conversation forwarded for review</span><h2>A starting point<br /><em>for review.</em></h2><p>Your configuration notes were forwarded to the SAMAY concierge for review. No appointment, configuration, or order is confirmed until the house replies.</p>{appointment?.isActive && appointment.bookingPageUrl ? <a className="button-primary" href={appointment.bookingPageUrl} target="_blank" rel="noreferrer">Choose a viewing time</a> : <Link href="/contact" className="arrow-link arrow-link--dark">Contact the house <ArrowUpRight size={15} /></Link>}</div> : <form className="bespoke-request__grid" onSubmit={submit} noValidate><div><SectionLabel index="06" dark>Continue by conversation</SectionLabel><h2>Bring the<br /><em>study closer.</em></h2><p>Share the configuration ID with the occasion around it. Every final possibility is reviewed individually.</p></div><div className="bespoke-request__form"><label><span>Name</span><input name="name" required autoComplete="name" placeholder="Your name" /></label><label><span>Email</span><input name="email" required type="email" autoComplete="email" placeholder="Your email address" /></label><label><span>Occasion</span><input name="occasion" placeholder="A birthday, a new chapter, simply because" /></label><aside className="form-handoff form-handoff--dark"><span>Configuration ID</span><p>{configurationReference} will travel with this request. Availability and delivery are not implied.</p></aside>{error && <p className="form-error form-error--dark" role="alert">{error}</p>}<button className="button-primary" disabled={requestMutation.isPending}>{requestMutation.isPending ? "Forwarding consultation" : "Request a consultation"} <ArrowUpRight size={15} /></button></div></form>}</div></section>
+  </div>;
 }
